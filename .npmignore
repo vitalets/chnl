@@ -1,0 +1,6 @@
+.babelrc
+.editorconfig
+.eslintrc
+.idea
+.travis.yml
+/coverage
