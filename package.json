@@ -1,6 +1,6 @@
 {
   "name": "chnl",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Simple and powerful javascript channels (events)",
   "author": {
     "name": "Vitaliy Potapov",
