@@ -1,3 +1,4 @@
+.npmignore
 .babelrc
 .editorconfig
 .eslintrc
