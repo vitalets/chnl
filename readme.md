@@ -1,5 +1,5 @@
-# Simple and powerful javascript channels (events)
-Implementation of channels (events, pub/sub pattern) in plain javascript. 
+# Simple and powerful javascript channels
+Implementation of channels (events, pub/sub pattern) in plain javascript.  
 API is inspired by [Chrome extensions events](https://developer.chrome.com/extensions/events#type-Event).
 
 ## Installation
