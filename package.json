@@ -10,7 +10,7 @@
     "code": "eslint ./index.js /test",
     "test": "ava",
     "coveralls": "coveralls < coverage/lcov.info",
-    "release": "npm run code && npm test && npm version patch && npm publish && git push --follow-tags"
+    "release-patch": "npm run code && npm test && npm version patch && npm publish && git push --follow-tags"
   },
   "repository": {
     "type": "git",
