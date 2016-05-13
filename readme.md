@@ -35,6 +35,11 @@ moduleA.onChanged.addListener(data => {
   console.log('moduleA.onChanged', data);
 });
 
+// mute channel (optionally you can accumulate events to dispatch them after unmute) 
+moduleA.onChanged.mute({accumulate: true});
+
+// unmute channel 
+moduleA.onChanged.unmute();
 ```
 
 ## API

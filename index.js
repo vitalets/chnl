@@ -12,12 +12,13 @@ const innerEvents = [
 export default class Channel {
   /**
    * Constructor
-   * @param {String} name
+   * @param {String} [name]
    * @param {Boolean} [noInnerEvents]
    */
   constructor (name, noInnerEvents) {
     this._listeners = [];
     this._mute = false;
+    this._accumulate = false;
     this._name = name || '';
     this._noInnerEvents = Boolean(noInnerEvents);
     if (!noInnerEvents) {
@@ -72,19 +73,26 @@ export default class Channel {
   /**
    * Call all listeners with specified params
    */
-  dispatch () {
+  dispatch (...args) {
     if (!this._mute) {
       this._listeners.forEach(listener => {
-        listener.callback.apply(listener.context, arguments);
+        listener.callback.apply(listener.context, args);
       });
+    } else if (this._accumulate) {
+      this._accumulate.push(args);
     }
   }
 
   /**
    * Mute channel
+   * @param {Object} [options]
+   * @param {Boolean} [options.accumulate]
    */
-  mute () {
+  mute (options = {}) {
     this._mute = true;
+    if (options.accumulate) {
+      this._accumulate = [];
+    }
   }
 
   /**
@@ -92,6 +100,10 @@ export default class Channel {
    */
   unmute () {
     this._mute = false;
+    if (this._accumulate) {
+      this._dispatchAccumulated();
+      this._accumulate = false;
+    }
   }
 
   /**
@@ -146,5 +158,13 @@ export default class Channel {
         return i;
       }
     }
+  }
+
+  /**
+   * Dispatch accumulated events
+   * @private
+   */
+  _dispatchAccumulated () {
+    this._accumulate.forEach(args => this.dispatch.apply(this, args));
   }
 }

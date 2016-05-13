@@ -77,3 +77,16 @@ test('should check listener existance', t => {
   t.false(channel.hasListener(spy));
   t.false(channel.hasListeners());
 });
+
+test('should accumulate events during mute and call them after unmute', t => {
+  const channel = new Channel();
+  const spy = sinon.spy();
+  channel.addListener(spy);
+  channel.mute({accumulate: true});
+  channel.dispatch(123);
+  channel.dispatch(123);
+  channel.dispatch(123);
+  t.is(spy.callCount, 0);
+  channel.unmute();
+  t.is(spy.callCount, 3);
+});
