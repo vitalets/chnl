@@ -19,6 +19,7 @@ export default class Channel {
     this._listeners = [];
     this._mute = false;
     this._accumulate = false;
+    this._accumulatedEvents = [];
     this._name = name || '';
     this._noInnerEvents = Boolean(noInnerEvents);
     if (!noInnerEvents) {
@@ -79,19 +80,22 @@ export default class Channel {
         listener.callback.apply(listener.context, args);
       });
     } else if (this._accumulate) {
-      this._accumulate.push(args);
+      this._accumulatedEvents.push(args);
     }
   }
 
   /**
    * Mute channel
    * @param {Object} [options]
-   * @param {Boolean} [options.accumulate]
+   * @param {Boolean} [options.accumulate] accumulate events and call listeners after .unmute()
    */
   mute (options = {}) {
     this._mute = true;
     if (options.accumulate) {
-      this._accumulate = [];
+      this._accumulate = true;
+    } else {
+      this._accumulate = false;
+      this._accumulatedEvents = [];
     }
   }
 
@@ -103,6 +107,7 @@ export default class Channel {
     if (this._accumulate) {
       this._dispatchAccumulated();
       this._accumulate = false;
+      this._accumulatedEvents = [];
     }
   }
 
@@ -165,6 +170,6 @@ export default class Channel {
    * @private
    */
   _dispatchAccumulated () {
-    this._accumulate.forEach(args => this.dispatch.apply(this, args));
+    this._accumulatedEvents.forEach(args => this.dispatch.apply(this, args));
   }
 }
