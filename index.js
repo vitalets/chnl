@@ -39,7 +39,7 @@ export default class Channel {
   }
 
   /**
-   * Remove litener from event
+   * Remove listener from event
    * @param {Function} callback
    * @param {Object} [context]
    */
@@ -107,7 +107,6 @@ export default class Channel {
     if (this._accumulate) {
       this._dispatchAccumulated();
       this._accumulate = false;
-      this._accumulatedEvents = [];
     }
   }
 
@@ -171,5 +170,6 @@ export default class Channel {
    */
   _dispatchAccumulated () {
     this._accumulatedEvents.forEach(args => this.dispatch.apply(this, args));
+    this._accumulatedEvents = [];
   }
 }
