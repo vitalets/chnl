@@ -8,7 +8,7 @@
     "email": "noginsk@rambler.ru"
   },
   "scripts": {
-    "eslint": "eslint ./index.js /test",
+    "eslint": "eslint /src /test",
     "check-deps": "check-dependencies --only-specified",
     "code": "npm run check-deps && npm run eslint",
     "test": "npm run check-deps && ava",
