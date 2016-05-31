@@ -12,8 +12,11 @@ npm i chnl --save
  * module A
  */
 
-// import chnl
+// import es5 code
 import Channel from 'chnl';
+
+// import es6 code
+import Channel from 'chnl/src';
 
 // create channel
 exports.onChanged = new Channel();
