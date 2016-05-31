@@ -1,5 +1,5 @@
 import test from 'ava';
-import Channel from '../index';
+import Channel from '../src/index';
 import sinon from 'sinon';
 
 test('should call listeners', t => {
