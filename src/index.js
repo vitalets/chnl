@@ -31,11 +31,21 @@ export default class Channel {
    * Add listener for event
    * @param {Function} callback
    * @param {Object} [context]
+   * @param {Boolean} [once]
    */
-  addListener (callback, context) {
+  addListener (callback, context, once) {
     this._ensureFunction(callback);
-    this._listeners.push({callback, context});
+    this._listeners.push({callback, context, once});
     this._dispatchInnerAddEvents.apply(this, arguments);
+  }
+
+  /**
+   * Add once listener for event
+   * @param {Function} callback
+   * @param {Object} [context]
+   */
+  addOnceListener (callback, context) {
+    this.addListener(callback, context, true);
   }
 
   /**
@@ -76,8 +86,9 @@ export default class Channel {
    */
   dispatch (...args) {
     if (!this._mute) {
-      this._listeners.forEach(listener => {
+      this._listeners = this._listeners.filter(listener => {
         listener.callback.apply(listener.context, args);
+        return !listener.once;
       });
     } else if (this._accumulate) {
       this._accumulatedEvents.push(args);

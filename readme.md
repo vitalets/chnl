@@ -37,6 +37,11 @@ moduleA.onChanged.addListener(data => {
   console.log('moduleA.onChanged', data);
 });
 
+// subscribe once
+moduleA.onChanged.addOnceListener(data => {
+  console.log('moduleA.onChanged once', data);
+});
+
 // mute channel (optionally you can accumulate events to dispatch them after unmute) 
 moduleA.onChanged.mute({accumulate: true});
 
