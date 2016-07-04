@@ -90,3 +90,15 @@ test('should accumulate events during mute and call them after unmute', t => {
   channel.unmute();
   t.is(spy.callCount, 3);
 });
+
+test('should call once listener only once', t => {
+  const channel = new Channel();
+  const spy = sinon.spy();
+  const context = {a: 1};
+  channel.addOnceListener(spy, context);
+  channel.dispatch(1);
+  channel.dispatch(2);
+  channel.dispatch(3);
+  t.is(spy.callCount, 1);
+  t.is(spy.getCall(0).thisValue, context);
+});
