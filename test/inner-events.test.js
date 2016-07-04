@@ -11,8 +11,8 @@ test('should call listeners of onListenerAdded', t => {
   channel.addListener(spy2);
   channel.addListener(spy2, context);
   t.is(spy.callCount, 2);
-  t.deepEqual(spy.getCall(0).args, [spy2]);
-  t.deepEqual(spy.getCall(1).args, [spy2, context]);
+  t.deepEqual(spy.getCall(0).args, [spy2, undefined, false]);
+  t.deepEqual(spy.getCall(1).args, [spy2, context, false]);
 });
 
 test('should call listeners of onListenerRemoved', t => {
@@ -37,7 +37,7 @@ test('should call listeners of onFirstListenerAdded', t => {
   channel.addListener(spy2);
   channel.addListener(spy3);
   t.is(spy.callCount, 1);
-  t.deepEqual(spy.getCall(0).args, [spy2]);
+  t.deepEqual(spy.getCall(0).args, [spy2, undefined, false]);
 });
 
 test('should call listeners of onLastListenerRemoved', t => {

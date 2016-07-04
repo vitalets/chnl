@@ -31,12 +31,9 @@ export default class Channel {
    * Add listener for event
    * @param {Function} callback
    * @param {Object} [context]
-   * @param {Boolean} [once]
    */
-  addListener (callback, context, once) {
-    this._ensureFunction(callback);
-    this._listeners.push({callback, context, once});
-    this._dispatchInnerAddEvents.apply(this, arguments);
+  addListener (callback, context) {
+    this._pushListener(callback, context, false);
   }
 
   /**
@@ -45,7 +42,7 @@ export default class Channel {
    * @param {Object} [context]
    */
   addOnceListener (callback, context) {
-    this.addListener(callback, context, true);
+    this._pushListener(callback, context, true);
   }
 
   /**
@@ -182,5 +179,17 @@ export default class Channel {
   _dispatchAccumulated () {
     this._accumulatedEvents.forEach(args => this.dispatch.apply(this, args));
     this._accumulatedEvents = [];
+  }
+
+  /**
+   * Pushes listener
+   * @param {Function} callback
+   * @param {Object} context
+   * @param {Boolean} once
+   */
+  _pushListener (callback, context, once) {
+    this._ensureFunction(callback);
+    this._listeners.push({callback, context, once});
+    this._dispatchInnerAddEvents.apply(this, arguments);
   }
 }
