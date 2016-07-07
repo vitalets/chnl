@@ -1,6 +1,6 @@
 {
   "name": "chnl",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Simple javascript channels compatible with Chrome extensions events API",
   "main": "./lib/index.js",
   "author": {
