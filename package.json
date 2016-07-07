@@ -2,7 +2,7 @@
   "name": "chnl",
   "version": "0.1.6",
   "description": "Simple javascript channels compatible with Chrome extensions events API",
-  "main": "./lib/index.js",
+  "main": "./es5/index.js",
   "author": {
     "name": "Vitaliy Potapov",
     "email": "noginsk@rambler.ru"
@@ -13,8 +13,8 @@
     "code": "npm run check-deps && npm run eslint",
     "test": "npm run check-deps && ava",
     "coveralls": "coveralls < coverage/lcov.info",
-    "clean": "rm -rf ./lib",
-    "compile": "babel ./src --out-dir ./lib",
+    "clean": "rm -rf ./es5",
+    "compile": "babel ./src --out-dir ./es5",
     "release-patch": "npm run code && npm test && npm version patch && npm run clean && npm run compile && npm publish && git push --follow-tags"
   },
   "devDependencies": {
