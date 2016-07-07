@@ -15,8 +15,7 @@
     "coveralls": "coveralls < coverage/lcov.info",
     "clean": "rm -rf ./lib",
     "compile": "babel ./src --out-dir ./lib",
-    "prepublish": "npm run clean && npm run compile",
-    "release-patch": "npm run code && npm test && npm version patch && npm publish && git push --follow-tags"
+    "release-patch": "npm run code && npm test && npm version patch && npm run clean && npm run compile && npm publish && git push --follow-tags"
   },
   "devDependencies": {
     "ava": "^0.14.0",
