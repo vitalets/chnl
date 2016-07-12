@@ -102,3 +102,26 @@ test('should call once listener only once', t => {
   t.is(spy.callCount, 1);
   t.is(spy.getCall(0).thisValue, context);
 });
+
+test('should correctly add and remove listeners in dispatching loop', t => {
+  const channel = new Channel();
+  const spy1 = sinon.spy();
+  const spy2 = sinon.spy(() => {
+    channel.addListener(spy4);
+    channel.removeListener(spy2);
+  });
+  const spy3 = sinon.spy();
+  const spy4 = sinon.spy();
+  channel.addListener(spy1);
+  channel.addListener(spy2);
+  channel.addListener(spy3);
+  channel.dispatch();
+  t.is(spy1.callCount, 1);
+  t.is(spy2.callCount, 1);
+  t.is(spy3.callCount, 1);
+  t.is(spy4.callCount, 0);
+  t.truthy(channel.hasListener(spy1));
+  t.falsy(channel.hasListener(spy2));
+  t.truthy(channel.hasListener(spy3));
+  t.truthy(channel.hasListener(spy4));
+});

@@ -83,9 +83,13 @@ export default class Channel {
    */
   dispatch (...args) {
     if (!this._mute) {
-      this._listeners = this._listeners.filter(listener => {
+      // ToDo: block adding/removing listeners to channel (throw an error) during dispatch operation
+      const listnersToInvoke = this._listeners.slice();
+      listnersToInvoke.forEach(listener => {
         listener.callback.apply(listener.context, args);
-        return !listener.once;
+        if (listener.once) {
+          this.removeListener(listener.callback, listener.context)
+        }
       });
     } else if (this._accumulate) {
       this._accumulatedEvents.push(args);
