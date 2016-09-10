@@ -15,7 +15,7 @@ export default class Channel {
    * @param {String} [name]
    * @param {Boolean} [noInnerEvents]
    */
-  constructor (name, noInnerEvents) {
+  constructor(name, noInnerEvents) {
     this._listeners = [];
     this._mute = false;
     this._accumulate = false;
@@ -32,7 +32,7 @@ export default class Channel {
    * @param {Function} callback
    * @param {Object} [context]
    */
-  addListener (callback, context) {
+  addListener(callback, context) {
     this._pushListener(callback, context, false);
   }
 
@@ -41,7 +41,7 @@ export default class Channel {
    * @param {Function} callback
    * @param {Object} [context]
    */
-  addOnceListener (callback, context) {
+  addOnceListener(callback, context) {
     this._pushListener(callback, context, true);
   }
 
@@ -50,7 +50,7 @@ export default class Channel {
    * @param {Function} callback
    * @param {Object} [context]
    */
-  removeListener (callback, context) {
+  removeListener(callback, context) {
     this._ensureFunction(callback);
     const index = this._indexOfListener(callback, context);
     if (index >= 0) {
@@ -65,7 +65,7 @@ export default class Channel {
    * @param {Object} [context]
    * @returns {Boolean}
    */
-  hasListener (callback, context) {
+  hasListener(callback, context) {
     this._ensureFunction(callback);
     return this._indexOfListener(callback, context) >= 0;
   }
@@ -74,14 +74,14 @@ export default class Channel {
    * Are there any listeners
    * @returns {Boolean}
    */
-  hasListeners () {
+  hasListeners() {
     return this._listeners.length > 0;
   }
 
   /**
    * Call all listeners with specified params
    */
-  dispatch (...args) {
+  dispatch(...args) {
     if (!this._mute) {
       // ToDo: block adding/removing listeners to channel (throw an error) during dispatch operation
       const listnersToInvoke = this._listeners.slice();
@@ -101,7 +101,7 @@ export default class Channel {
    * @param {Object} [options]
    * @param {Boolean} [options.accumulate] accumulate events and call listeners after .unmute()
    */
-  mute (options = {}) {
+  mute(options = {}) {
     this._mute = true;
     if (options.accumulate) {
       this._accumulate = true;
@@ -114,7 +114,7 @@ export default class Channel {
   /**
    * Unmute channel
    */
-  unmute () {
+  unmute() {
     this._mute = false;
     if (this._accumulate) {
       this._dispatchAccumulated();
@@ -126,7 +126,7 @@ export default class Channel {
    * Ensure function
    * @param {Function} callback
    */
-  _ensureFunction (callback) {
+  _ensureFunction(callback) {
     if (typeof callback !== 'function') {
       throw new Error('Channel ' + this._name + ': listener is not a function');
     }
@@ -136,7 +136,7 @@ export default class Channel {
    * Dispatch inner events when listener is added
    * @private
    */
-  _dispatchInnerAddEvents () {
+  _dispatchInnerAddEvents() {
     if (!this._noInnerEvents) {
       this.onListenerAdded.dispatch.apply(this.onListenerAdded, arguments);
       if (this._listeners.length === 1) {
@@ -149,7 +149,7 @@ export default class Channel {
    * Dispatch inner events when listener is removed
    * @private
    */
-  _dispatchInnerRemoveEvents () {
+  _dispatchInnerRemoveEvents() {
     if (!this._noInnerEvents) {
       this.onListenerRemoved.dispatch.apply(this.onListenerRemoved, arguments);
       if (this._listeners.length === 0) {
@@ -164,7 +164,7 @@ export default class Channel {
    * @param {Object} [context]
    * @private
    */
-  _indexOfListener (callback, context) {
+  _indexOfListener(callback, context) {
     for (let i = 0; i < this._listeners.length; i++) {
       const listener = this._listeners[i];
       const equalCallbacks = listener.callback === callback;
@@ -180,7 +180,7 @@ export default class Channel {
    * Dispatch accumulated events
    * @private
    */
-  _dispatchAccumulated () {
+  _dispatchAccumulated() {
     this._accumulatedEvents.forEach(args => this.dispatch.apply(this, args));
     this._accumulatedEvents = [];
   }
@@ -191,7 +191,7 @@ export default class Channel {
    * @param {Object} context
    * @param {Boolean} once
    */
-  _pushListener (callback, context, once) {
+  _pushListener(callback, context, once) {
     this._ensureFunction(callback);
     this._listeners.push({callback, context, once});
     this._dispatchInnerAddEvents.apply(this, arguments);
