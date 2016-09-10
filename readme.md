@@ -49,7 +49,7 @@ moduleA.onChanged.mute({accumulate: true});
 moduleA.onChanged.unmute();
 ```
 
-## API
+## Channel API
 * addListener
 * removeListener
 * hasListener
@@ -57,3 +57,36 @@ moduleA.onChanged.unmute();
 * dispatch
 * mute
 * unmute
+
+## EventEmitter
+Library includes simple EventEmitter based on channels.  
+Not all methods of original nodejs [EventEmitter](https://nodejs.org/api/events.html#events_class_eventemitter) 
+are supported but most popular:
+
+* addListener / on
+* removeListener / off
+* hasListener / has
+* dispatch / emit
+
+Example:
+```js
+
+import {EventEmitter} from 'chnl';
+
+// use as standalone object
+
+const emitter = new EventEmitter();
+emitter.on('event', data => console.log(data));
+emitter.emit('event', 'hello world!'); // output 'hello world!'
+
+// or as parent for inheritance
+
+class MyClass extends EventEmitter {
+  someMethod() {
+    this.emit('event', 'hello world!')
+  }
+}
+
+const myClass = new MyClass();
+myClass.on('event', data => console.log(data));
+myClass.someMethod(); // output 'hello world!'
