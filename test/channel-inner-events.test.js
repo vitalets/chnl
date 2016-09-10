@@ -1,5 +1,5 @@
 import test from 'ava';
-import Channel from '../src/channel';
+import Channel from '../src';
 import sinon from 'sinon';
 
 test('should call listeners of onListenerAdded', t => {

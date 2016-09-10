@@ -1,5 +1,5 @@
 import test from 'ava';
-import EventEmitter from '../src/event-emitter';
+import {EventEmitter} from '../src';
 import sinon from 'sinon';
 
 test.beforeEach(t => {
