@@ -11,7 +11,7 @@
     "eslint": "eslint src test",
     "check-deps": "check-dependencies",
     "code": "npm run check-deps && npm run eslint",
-    "test": "npm run check-deps && ava",
+    "test": "ava",
     "coveralls": "coveralls < coverage/lcov.info",
     "clean": "rm -rf ./es5",
     "compile": "babel ./src --out-dir ./es5",
@@ -43,7 +43,7 @@
       "test/*.test.js"
     ],
     "source": [
-      "./src/index.js"
+      "src/*.js"
     ],
     "require": "babel-register",
     "verbose": true
