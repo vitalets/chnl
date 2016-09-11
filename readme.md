@@ -7,15 +7,15 @@ compatible with [Chrome extensions events API](https://developer.chrome.com/exte
 Additionally, there are some extra features (e.g. passing `context` with listener) and utility classes
 that makes life easier.
 
-## Classes overview
-* [Channel](#channel) - chrome-like event channel
-* [EventEmitter](#eventemitter) - nodejs-like event emitter based on channels
-* [Subscription](#subscription) - class allowing to dynamically attach/detach batch of listeners
-
 ## Installation
 ```
 npm i chnl --save
 ```
+
+## Classes overview
+* [Channel](#channel) - chrome-like event channel
+* [EventEmitter](#eventemitter) - nodejs-like event emitter based on channels
+* [Subscription](#subscription) - class allowing to dynamically attach/detach batch of listeners
 
 ## Channel
 Channel is class that can attach/detach listeners and dispatch data to them.  
