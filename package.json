@@ -13,12 +13,11 @@
     "code": "npm run check-deps && npm run eslint",
     "test": "ava",
     "coveralls": "coveralls < coverage/lcov.info",
-    "clean": "rm -rf ./es5",
-    "compile": "babel ./src --out-dir ./es5",
-    "publish": "npm run clean && npm run compile && npm publish && git push --follow-tags",
+    "babel": "rm -rf ./es5 && babel ./src --out-dir ./es5",
+    "publish-to-npm": "npm run babel && npm publish && git push --follow-tags",
     "pre-release": "npm run code && npm test",
-    "release-patch": "npm run pre-release && npm version patch && npm run publish",
-    "release-minor": "npm run pre-release && npm version minor && npm run publish"
+    "release-patch": "npm run pre-release && npm version patch && npm run publish-to-npm",
+    "release-minor": "npm run pre-release && npm version minor && npm run publish-to-npm"
   },
   "devDependencies": {
     "ava": "^0.16.0",
