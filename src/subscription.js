@@ -1,23 +1,22 @@
 /**
- * Subscription is a class allowing easily attach/detach batch of listeners to event channels.
+ * Subscription is utility class allowing dynamically attach/detach batch of listeners to event channels.
  *
  * Example:
- *
- * this._listeners = new Channel.Subscription([
- *   {
- *     channel: chrome.tabs.onUpdated,
- *     listener: this._onTabUpdated.bind(this)
- *   },
- *   {
- *     channel: document.getElementById('button'),
- *     event: 'click',
- *     listener: this._onButtonClick.bind(this)
- *   }
- * ]);
- * ...
- * this._listeners.on(); // now is listening events
- * ...
- * this._listeners.off(); // now is NOT listening
+   this._subscription = new Channel.Subscription([
+   {
+    channel: chrome.tabs.onUpdated,
+    listener: this._onTabUpdated.bind(this)
+   },
+   {
+    channel: document.getElementById('button'),
+    event: 'click',
+    listener: this._onButtonClick.bind(this)
+   }
+   ]);
+
+   this._subscription.on(); // now listeners are attached
+
+   this._subscription.off(); // now listeners are detached
  *
  */
 

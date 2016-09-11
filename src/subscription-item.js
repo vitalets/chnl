@@ -50,13 +50,13 @@ export default class SubscriptionItem {
   _assertParams() {
     const {channel, event, listener} = this._params;
     if (!channel || typeof channel !== 'object') {
-      throw new Error('Channel shoud be object');
+      throw new Error('Channel should be object');
     }
     if (event && typeof event !== 'string') {
-      throw new Error('Event shoud be string');
+      throw new Error('Event should be string');
     }
     if (!listener || typeof listener !== 'function') {
-      throw new Error('Listener shoud be function');
+      throw new Error('Listener should be function');
     }
   }
 }
