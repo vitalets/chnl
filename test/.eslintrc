@@ -11,5 +11,8 @@
   "plugins": [
     "ava",
     "babel"
-  ]
+  ],
+  "rules": {
+    "ava/no-skip-test": 0
+  }
 }

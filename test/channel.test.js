@@ -125,3 +125,14 @@ test('should correctly add and remove listeners in dispatching loop', t => {
   t.truthy(channel.hasListener(spy3));
   t.truthy(channel.hasListener(spy4));
 });
+
+// see: https://esdiscuss.org/topic/weak-event-listener
+// see: https://ponyfoo.com/articles/weakref
+// conclusion: weak event listeners currently impossible
+test.skip('should remove unused listeners', t => {
+  const channel = new Channel();
+  const obj = {spy: sinon.spy()};
+  channel.addListener(obj.spy);
+  delete obj.spy;
+  t.false(channel.hasListeners());
+});
