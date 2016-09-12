@@ -1,11 +1,11 @@
 import test from 'ava';
-import Channel, {Subscription, EventEmitter} from '../src';
+import Channel from '../src';
 import sinon from 'sinon';
 
 test('should manage listeners of channel', t => {
   const channel = new Channel();
   const spy = sinon.spy();
-  const subscription = new Subscription([
+  const subscription = new Channel.Subscription([
     {
       channel: channel,
       listener: spy,
@@ -25,9 +25,9 @@ test('should manage listeners of channel', t => {
 });
 
 test('should manage listeners of event-emitter', t => {
-  const emitter = new EventEmitter();
+  const emitter = new Channel.EventEmitter();
   const spy = sinon.spy();
-  const subscription = new Subscription([
+  const subscription = new Channel.Subscription([
     {
       channel: emitter,
       event: 'event',
@@ -53,7 +53,7 @@ test('should manage listeners of event-emitter', t => {
 
 test('should throw in case of incorrect channel', t => {
   t.throws(() => {
-    new Subscription([
+    new Channel.Subscription([
       {
         channel: 'abc',
       }
@@ -63,7 +63,7 @@ test('should throw in case of incorrect channel', t => {
 
 test('should throw in case of incorrect listener', t => {
   t.throws(() => {
-    new Subscription([
+    new Channel.Subscription([
       {
         channel: new Channel(),
         listener: 'abc',
@@ -74,7 +74,7 @@ test('should throw in case of incorrect listener', t => {
 
 test('should throw in case of incorrect event', t => {
   t.throws(() => {
-    new Subscription([
+    new Channel.Subscription([
       {
         channel: new Channel(),
         listener: 'abc',

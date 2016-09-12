@@ -1,9 +1,9 @@
 import test from 'ava';
-import {EventEmitter} from '../src';
+import Channel from '../src';
 import sinon from 'sinon';
 
 test.beforeEach(t => {
-  t.context = new EventEmitter();
+  t.context = new Channel.EventEmitter();
 });
 
 test('should call listeners on different events', t => {
