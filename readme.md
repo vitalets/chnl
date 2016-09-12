@@ -18,7 +18,8 @@ npm i chnl --save
 * [Subscription](#subscription) - class allowing to dynamically attach/detach batch of listeners
 
 ## Channel
-Channel is class that can attach/detach listeners and dispatch data to them.  
+Channel is class that can attach/detach listeners and dispatch data to them.
+This allows to make more independent modules that just produce events in outer world.   
 API:  
 
 * addListener
@@ -33,13 +34,12 @@ Example:
 
 **module A**
 ```js
-// import es5 code
 import Channel from 'chnl';
 
 // create channel
 exports.onChanged = new Channel();
 
-// dispatch event when needed
+// dispatch event (and don't care if there module B and what it will do with event)
 exports.onChanged.dispatch(data);
 ```
 
@@ -68,7 +68,7 @@ moduleA.onChanged.unmute();
 EventEmitter is basically a group of channels with common api.  
 The main difference from single channel is that each method takes additional `event` argument.  
 Not all methods of original nodejs [EventEmitter](https://nodejs.org/api/events.html#events_class_eventemitter) 
-are supported but most popular:
+are supported but most needed:
 
 * addListener / on
 * removeListener / off
@@ -77,18 +77,15 @@ are supported but most popular:
 
 Example:
 ```js
-
-import {EventEmitter} from 'chnl';
+import Channel from 'chnl';
 
 // use as standalone object
-
-const emitter = new EventEmitter();
+const emitter = new Channel.EventEmitter();
 emitter.on('event', data => console.log(data));
 emitter.emit('event', 'hello world!'); // output 'hello world!'
 
 // use as parent for some class
-
-class MyClass extends EventEmitter {
+class MyClass extends Channel.EventEmitter {
   someMethod() {
     this.emit('event', 'hello world!')
   }
@@ -108,6 +105,8 @@ You pass array of `{channel: ..., event: ..., listener: ...}` to constructor and
 
 Example:
 ```js
+import Channel from 'chnl';
+
 this._subscription = new Channel.Subscription([
     {
      channel: chrome.tabs.onUpdated,
