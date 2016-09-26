@@ -97,6 +97,13 @@ export default class Channel {
   }
 
   /**
+   * Call all listeners with specified params asynchronously
+   */
+  dispatchAsync(...args) {
+    setTimeout(() => this.dispatch(...args), 0);
+  }
+
+  /**
    * Mute channel
    * @param {Object} [options]
    * @param {Boolean} [options.accumulate] accumulate events and call listeners after .unmute()

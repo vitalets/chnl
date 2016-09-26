@@ -27,6 +27,7 @@ API:
 * hasListener
 * hasListeners
 * dispatch
+* dispatchAsync
 * mute
 * unmute
 
@@ -41,6 +42,9 @@ exports.onChanged = new Channel();
 
 // dispatch event (and don't care if there module B and what it will do with event)
 exports.onChanged.dispatch(data);
+
+// dispatch event asynchronously via setTimeout(..., 0);
+exports.onChanged.dispatchAsync(data);
 ```
 
 **module B**
