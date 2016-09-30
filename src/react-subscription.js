@@ -56,7 +56,7 @@ export default class ReactSubscription extends Subscription {
     component[callbackName] = (...args) => {
       this[methodName]();
       if (typeof baseCallback === 'function') {
-        baseCallback.apply(component, args);
+        return baseCallback.apply(component, args);
       }
     };
   }
