@@ -15,6 +15,36 @@ test('should call listeners', t => {
   t.deepEqual(spy2.getCall(0).args, [1, 2]);
 });
 
+test('should async call listener', t => {
+  const clock = sinon.useFakeTimers();
+  const channel = new Channel();
+  const spy = sinon.spy();
+  channel.addListener(spy);
+  channel.dispatchAsync(1, 2);
+  t.is(spy.callCount, 0);
+  clock.tick(0);
+  t.is(spy.callCount, 1);
+  t.deepEqual(spy.getCall(0).args, [1, 2]);
+  clock.restore();
+});
+
+test('should accumulate async calls', t => {
+  const clock = sinon.useFakeTimers();
+  const channel = new Channel();
+  const spy = sinon.spy();
+  channel.addListener(spy);
+  channel.mute({accumulate: true});
+  channel.dispatchAsync(1, 2);
+  t.is(spy.callCount, 0);
+  clock.tick(0);
+  t.is(spy.callCount, 0);
+  channel.unmute();
+  t.is(spy.callCount, 0);
+  clock.tick(0);
+  t.is(spy.callCount, 1);
+  t.deepEqual(spy.getCall(0).args, [1, 2]);
+  clock.restore();
+});
 
 test('should not call listener after remove', t => {
   const channel = new Channel();

@@ -82,18 +82,14 @@ export default class Channel {
    * Call all listeners with specified params
    */
   dispatch(...args) {
-    if (!this._mute) {
-      // ToDo: block adding/removing listeners to channel (throw an error) during dispatch operation
-      const listnersToInvoke = this._listeners.slice();
-      listnersToInvoke.forEach(listener => {
-        listener.callback.apply(listener.context, args);
-        if (listener.once) {
-          this.removeListener(listener.callback, listener.context)
-        }
-      });
-    } else if (this._accumulate) {
-      this._accumulatedEvents.push(args);
-    }
+    this._invokeListeners({args, async: false});
+  }
+
+  /**
+   * Call all listeners with specified params asynchronously
+   */
+  dispatchAsync(...args) {
+    this._invokeListeners({args, async: true});
   }
 
   /**
@@ -119,6 +115,42 @@ export default class Channel {
     if (this._accumulate) {
       this._dispatchAccumulated();
       this._accumulate = false;
+    }
+  }
+
+  /**
+   * @param {Object} options
+   * @param {Array} options.args
+   * @param {Boolean} [options.async]
+   * @private
+   */
+  _invokeListeners(options = {args: [], async: false}) {
+    if (!this._mute) {
+      // ToDo: block adding/removing listeners to channel (throw an error) during dispatch operation
+      const listnersToInvoke = this._listeners.slice();
+      listnersToInvoke.forEach(listener => {
+        this._invokeListener(listener, options);
+        if (listener.once) {
+          this.removeListener(listener.callback, listener.context)
+        }
+      });
+    } else if (this._accumulate) {
+      this._accumulatedEvents.push(options);
+    }
+  }
+
+  /**
+   * @param {Object} listener
+   * @param {Object} options
+   * @param {Array} options.args
+   * @param {Boolean} options.async
+   * @private
+   */
+  _invokeListener(listener, options) {
+    if (options.async) {
+      setTimeout(() => listener.callback.apply(listener.context, options.args), 0);
+    } else {
+      listener.callback.apply(listener.context, options.args);
     }
   }
 
@@ -181,7 +213,7 @@ export default class Channel {
    * @private
    */
   _dispatchAccumulated() {
-    this._accumulatedEvents.forEach(args => this.dispatch.apply(this, args));
+    this._accumulatedEvents.forEach(options => this._invokeListeners(options));
     this._accumulatedEvents = [];
   }
 
