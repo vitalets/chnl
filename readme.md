@@ -127,3 +127,36 @@ this._subscription.on(); // now listeners are attached
 
 this._subscription.off(); // now listeners are detached
 ```
+
+## ReactSubscription
+Extends Subscription class and can be used for attaching/detaching listeners in ReactComponent callbacks componentDidMount/componentWillUnmount
+
+Example via Subscription class:
+```js
+class Button extends React.Component {
+  constructor() {
+    super();
+    this.subscription = new Channel.Subscription([
+      {channel: onNewData, listener: this.handleNewData.bind(this)}
+    ]);
+  }
+  componentDidMount() {
+    this.subscription.on();
+  }
+  componentWillUnmount() {
+    this.subscription.off();
+  }
+}
+```
+
+Example via ReactSubscription class:
+```js
+class Button extends React.Component {
+  constructor() {
+    super();
+    new Channel.ReactSubscription(this, [
+      {channel: onNewData, listener: this.handleNewData.bind(this)}
+    ]);
+  }
+}
+```

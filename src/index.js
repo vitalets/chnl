@@ -5,9 +5,11 @@
 import Channel from './channel';
 import EventEmitter from './event-emitter';
 import Subscription from './subscription';
+import ReactSubscription from './react-subscription';
 
 Channel.EventEmitter = EventEmitter;
 Channel.Subscription = Subscription;
+Channel.ReactSubscription = ReactSubscription;
 
 export default Channel;
 /*
