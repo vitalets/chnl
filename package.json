@@ -1,6 +1,6 @@
 {
   "name": "chnl",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Chrome compatible javascript channels",
   "main": "./es5/index.js",
   "author": {
