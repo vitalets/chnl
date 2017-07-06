@@ -1,44 +1,39 @@
-/**
- * ReactSubscription is an utility class that extends Subscription class and allows to subscribe/unsubscribe
- * listeners in ReactComponent callbacks - componentDidMount/componentWillUnmount
- * Example:
- * Before:
-     class Button extends React.Component {
-      constructor() {
-        super();
-        this.subscription = new Channel.Subscription([
-          {channel: onNewData, listener: this.handleNewData.bind(this)}
-        ]);
-      }
-      componentDidMount() {
-        this.subscription.on();
-      }
-      componentWillUnmount() {
-        this.subscription.off();
-      }
-    }
-
-     After:
-
-     class Button extends React.Component {
-      constructor() {
-        super();
-        new Channel.ReactSubscription(this, [
-          {channel: onNewData, listener: this.handleNewData.bind(this)}
-        ]);
-      }
-    }
- */
-
 import Subscription from './subscription';
 
+/**
+ * Utility class that extends Subscription for using in ReactComponent - automatically attach/detach listeners
+ * in `componentDidMount` / `componentWillUnmount`.
+ *
+ * @param {ReactComponent} component
+ * @param {Array<{channel, event, listener}>} items
+ *
+ * @example
+ * class Button extends React.Component {
+ *   constructor() {
+ *     super();
+ *     new Channel.ReactSubscription(this, [
+ *       {channel: onNewData, listener: this.handleNewData.bind(this)}
+ *     ]);
+ *   }
+ * }
+ *
+ * // actually equals to (but with more boilerplate code):
+ * class Button extends React.Component {
+ *   constructor() {
+ *     super();
+ *     this.subscription = new Channel.Subscription([
+ *       {channel: onNewData, listener: this.handleNewData.bind(this)}
+ *     ]);
+ *   }
+ *   componentDidMount() {
+ *     this.subscription.on();
+ *   }
+ *   componentWillUnmount() {
+ *     this.subscription.off();
+ *   }
+ * }
+ */
 export default class ReactSubscription extends Subscription {
-  /**
-   * Constructor
-   *
-   * @param {ReactComponent} component
-   * @param {Array<{channel, event, listener}>} items
-   */
   constructor(component, items) {
     super(items);
     this._overrideComponentCallback(component, 'componentDidMount', 'on');

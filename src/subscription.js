@@ -1,33 +1,25 @@
-/**
- * Subscription is utility class allowing dynamically attach/detach batch of listeners to event channels.
- *
- * Example:
-   this._subscription = new Channel.Subscription([
-   {
-    channel: chrome.tabs.onUpdated,
-    listener: this._onTabUpdated.bind(this)
-   },
-   {
-    channel: document.getElementById('button'),
-    event: 'click',
-    listener: this._onButtonClick.bind(this)
-   }
-   ]);
-
-   this._subscription.on(); // now listeners are attached
-
-   this._subscription.off(); // now listeners are detached
- *
- */
-
 import SubscriptionItem from './subscription-item';
 
+/**
+ * Utility class allowing dynamically attach/detach batch of listeners to event channels.
+ *
+ * @param {Array<{channel, event, listener}>} items
+ *
+ * @example
+ * import Channel from 'chnl';
+ * const subscription = new Channel.Subscription([
+ *   {
+ *     channel: chrome.tabs.onUpdated,
+ *     listener: this._onTabUpdated.bind(this)
+ *   }
+ * ]);
+ *
+ * // attach listeners
+ * subscription.on();
+ * // detach listeners
+ * subscription.off();
+ */
 export default class Subscription {
-  /**
-   * Constructor
-   *
-   * @param {Array<{channel, event, listener}>} items
-   */
   constructor(items) {
     this._items = items.map(params => new SubscriptionItem(params));
   }

@@ -1,7 +1,7 @@
 /**
  * Subscription item
+ * @private
  */
-
 export default class SubscriptionItem {
   /**
    * Constructor

@@ -1,13 +1,20 @@
-/**
- * Simple event emitter based on channel
- */
-
 import Channel from './channel';
 
+/**
+ * Event emitter similar to Node.js [EventEmitter](https://nodejs.org/api/events.html#events_class_eventemitter).
+ * The main difference from single channel is that each method takes additional `event` argument.
+ *
+ * @example
+ * import Channel from 'chnl';
+ *
+ * // create emitter
+ * const emitter = new Channel.EventEmitter();
+ * // listen 'myEvent'
+ * emitter.on('myEvent', data => console.log(data));
+ * // emit 'myEvent'
+ * emitter.emit('myEvent', 'hello world!');
+ */
 export default class EventEmitter {
-  /**
-   * Constructor
-   */
   constructor() {
     this._channels = new Map();
   }

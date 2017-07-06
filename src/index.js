@@ -7,19 +7,24 @@ import EventEmitter from './event-emitter';
 import Subscription from './subscription';
 import ReactSubscription from './react-subscription';
 
-Channel.EventEmitter = EventEmitter;
-Channel.Subscription = Subscription;
-Channel.ReactSubscription = ReactSubscription;
+/**
+ * @private
+ */
+const chnl = Channel;
+chnl.EventEmitter = EventEmitter;
+chnl.Subscription = Subscription;
+chnl.ReactSubscription = ReactSubscription;
 
-export default Channel;
+export default chnl;
+
 /*
-  Can not export additional classes like:
+ Can not export additional classes like:
 
-  export {
-    EventEmitter,
-    Subscription,
-  };
+ export {
+ EventEmitter,
+ Subscription,
+ };
 
-  because in that case babel's output is not compatible with pure commonjs
-  See: http://stackoverflow.com/questions/33505992/babel-6-changes-how-it-exports-default
-*/
+ because in that case babel's output is not compatible with pure commonjs
+ See: http://stackoverflow.com/questions/33505992/babel-6-changes-how-it-exports-default
+ */

@@ -1,7 +1,3 @@
-/**
- * Channel
- */
-
 const innerEvents = [
   'onListenerAdded',
   'onListenerRemoved',
@@ -9,12 +5,23 @@ const innerEvents = [
   'onLastListenerRemoved'
 ];
 
+/**
+ * Channel of particular events. Allows attach/detach listeners and dispatch event data.
+ *
+ * @param {String} [name]
+ * @param {Boolean} [noInnerEvents]
+ *
+ * @example
+ * import Channel from 'chnl';
+ *
+ * // create channel
+ * const onMyEvent = new Channel.EventEmitter();
+ * // listen
+ * onMyEvent.addListener(data => console.log(data));
+ * // dispatch data
+ * onMyEvent.dispatch(data);
+ */
 export default class Channel {
-  /**
-   * Constructor
-   * @param {String} [name]
-   * @param {Boolean} [noInnerEvents]
-   */
   constructor(name, noInnerEvents) {
     this._listeners = [];
     this._mute = false;
