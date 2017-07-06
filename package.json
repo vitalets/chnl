@@ -9,6 +9,7 @@
   },
   "scripts": {
     "eslint": "eslint src test",
+    "eslint-staged": "lint-staged",
     "check-deps": "check-dependencies",
     "code": "npm run check-deps && npm run eslint",
     "test": "ava",
@@ -17,10 +18,15 @@
     "docs": "CMD=build npm run docs-base",
     "docs-serve": "CMD=serve npm run docs-base -- --watch",
     "babel": "rm -rf ./es5 && babel ./src --out-dir ./es5",
-    "publish-to-npm": "npm run babel && npm publish && git push --follow-tags",
-    "pre-release": "npm run code && npm test",
-    "release-patch": "npm run pre-release && npm version patch && npm run publish-to-npm",
-    "release-minor": "npm run pre-release && npm version minor && npm run publish-to-npm"
+    "release": "npm run code && npm test && npm version $VER && npm publish && git push --follow-tags --no-verify",
+    "release-patch": "VER=patch npm run release",
+    "release-minor": "VER=minor npm run release",
+    "precommit": "npm run eslint-staged && npm t",
+    "prepush": "npm run code && npm t",
+    "prepublish": "npm run babel && npm run test"
+  },
+  "lint-staged": {
+    "{src,test}/**/*.js": "eslint"
   },
   "devDependencies": {
     "ava": "^0.20.0",
@@ -35,7 +41,8 @@
     "eslint": "^4.1.1",
     "eslint-plugin-ava": "^4.2.1",
     "eslint-plugin-babel": "^4.1.1",
-    "ghooks": "^2.0.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.0.0",
     "sinon": "^2.3.6"
   },
   "config": {
