@@ -23,20 +23,20 @@
     "release-minor": "npm run pre-release && npm version minor && npm run publish-to-npm"
   },
   "devDependencies": {
-    "ava": "^0.16.0",
+    "ava": "^0.20.0",
     "babel-cli": "^6.14.0",
-    "babel-eslint": "^6.1.2",
+    "babel-eslint": "^7.2.3",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-es2015": "^6.14.0",
     "babel-register": "^6.14.0",
     "check-dependencies": "^1.0.1",
     "coveralls": "^2.11.12",
     "documentation": "^4.0.0-rc.1",
-    "eslint": "^3.5.0",
-    "eslint-plugin-ava": "^3.0.0",
-    "eslint-plugin-babel": "^3.3.0",
-    "ghooks": "^1.3.2",
-    "sinon": "^1.17.5"
+    "eslint": "^4.1.1",
+    "eslint-plugin-ava": "^4.2.1",
+    "eslint-plugin-babel": "^4.1.1",
+    "ghooks": "^2.0.0",
+    "sinon": "^2.3.6"
   },
   "config": {
     "ghooks": {
