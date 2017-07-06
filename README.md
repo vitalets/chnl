@@ -1,4 +1,5 @@
-# Chrome compatible javascript channels
+# Chnl
+> Chrome compatible JavaScript channels
 
 [![npm version](https://badge.fury.io/js/chnl.svg)](https://badge.fury.io/js/chnl)
 
