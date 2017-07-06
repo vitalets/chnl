@@ -13,6 +13,7 @@
     "check-deps": "check-dependencies",
     "code": "npm run check-deps && npm run eslint",
     "test": "ava",
+    "ci": "npm run code && npm test",
     "coveralls": "coveralls < coverage/lcov.info",
     "docs-base": "node_modules/documentation/bin/documentation.js $CMD src/** -f html -o docs -g --document-exported --infer-private=\"^_\" -c documentation.yml",
     "docs": "CMD=build npm run docs-base",
@@ -21,8 +22,8 @@
     "release": "npm run code && npm test && npm version $VER && npm publish && git push --follow-tags --no-verify",
     "release-patch": "VER=patch npm run release",
     "release-minor": "VER=minor npm run release",
-    "precommit": "npm run eslint-staged && npm t",
-    "prepush": "npm run code && npm t",
+    "precommit": "npm run eslint-staged && npm test",
+    "prepush": "npm run code && npm test",
     "prepublish": "npm run babel && npm run test"
   },
   "lint-staged": {
