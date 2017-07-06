@@ -6,3 +6,4 @@
 .travis.yml
 /coverage
 /test
+/docs
