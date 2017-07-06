@@ -1,7 +1,7 @@
 {
   "name": "chnl",
   "version": "0.2.5",
-  "description": "Chrome compatible JavaScript channels",
+  "description": "Implementation of event channels compatible with Chrome extensions events API",
   "main": "./es5/index.js",
   "author": {
     "name": "Vitaliy Potapov",

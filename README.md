@@ -1,12 +1,11 @@
-# Chnl
-> Chrome compatible JavaScript channels
-
+# chnl
 [![npm version](https://badge.fury.io/js/chnl.svg)](https://badge.fury.io/js/chnl)
+[![license](https://img.shields.io/npm/l/chnl.svg)](https://www.npmjs.com/package/chnl)
 
-Implementation of channels (aka events, pub/sub, dispatcher) inspired and 
-compatible with [Chrome extensions events API](https://developer.chrome.com/extensions/events#type-Event).  
-Additionally, there are some extra features (e.g. passing `context` with listener) and utility classes
-that makes life easier.
+> Chrome compatible JavaScript event channels
+
+Implementation of event channels (aka pub/sub, dispatcher, emitter) inspired and 
+compatible with [Chrome extensions events API](https://developer.chrome.com/extensions/events#type-Event).
 
 ## Installation
 ```
@@ -16,7 +15,7 @@ npm i chnl --save
 ## Documentation
 https://vitalets.github.io/chnl
 
-## Example
+## Usage
 **module A**
 ```js
 import Channel from 'chnl';
