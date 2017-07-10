@@ -22,34 +22,18 @@ https://vitalets.github.io/chnl
 import Channel from 'chnl';
 
 // create channel
-exports.onChanged = new Channel();
+const myChannel = exports.myChannel = new Channel();
 
-// dispatch event (and don't care if there module B and what it will do with event)
-exports.onChanged.dispatch(data);
-
-// dispatch event asynchronously via setTimeout(..., 0);
-exports.onChanged.dispatchAsync(data);
+// dispatch event
+setTimeout(() => myChannel.dispatch(data), 1000);
 ```
 
 **module B**
 ```js
 import moduleA from './moduleA';
 
-// subscribe on channel
-moduleA.onChanged.addListener(data => {
-  console.log('moduleA.onChanged', data);
-});
-
-// subscribe once
-moduleA.onChanged.addOnceListener(data => {
-  console.log('moduleA.onChanged once', data);
-});
-
-// mute channel (optionally you can accumulate events to dispatch them after unmute) 
-moduleA.onChanged.mute({accumulate: true});
-
-// unmute channel 
-moduleA.onChanged.unmute();
+// subscribe on channel and listen events
+moduleA.myChannel.addListener(data => console.log('myChannel event come with data', data));
 ```
 
 ## License
