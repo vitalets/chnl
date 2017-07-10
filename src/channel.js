@@ -61,8 +61,16 @@ export default class Channel {
     this._ensureFunction(callback);
     const index = this._indexOfListener(callback, context);
     if (index >= 0) {
-      this._listeners.splice(index, 1);
-      this._dispatchInnerRemoveEvents.apply(this, arguments);
+      this._spliceListener(index);
+    }
+  }
+
+  /**
+   * Remove all listeners from channel.
+   */
+  removeAllListeners() {
+    while (this.hasListeners()) {
+      this._spliceListener(0);
     }
   }
 
@@ -234,5 +242,19 @@ export default class Channel {
     this._ensureFunction(callback);
     this._listeners.push({callback, context, once});
     this._dispatchInnerAddEvents.apply(this, arguments);
+  }
+
+  /**
+   * Splice listener under index
+   * @param {Number} index
+   */
+  _spliceListener(index) {
+    const listener = this._listeners[index];
+    this._listeners.splice(index, 1);
+    const args = [listener.callback];
+    if (listener.context) {
+      args.push(listener.context);
+    }
+    this._dispatchInnerRemoveEvents.apply(this, args);
   }
 }
