@@ -85,6 +85,17 @@ test('should not remove listener with another context', t => {
   t.is(spy.callCount, 1);
 });
 
+test('should remove all listeners', t => {
+  const channel = new Channel();
+  const spy1 = sinon.spy();
+  const spy2 = sinon.spy();
+  channel.addListener(spy1);
+  channel.addListener(spy2);
+  channel.removeAllListeners();
+  t.false(channel.hasListener(spy1));
+  t.false(channel.hasListener(spy2));
+});
+
 test('should not call listener after mute and call after unmute', t => {
   const channel = new Channel();
   const spy = sinon.spy();
