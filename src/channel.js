@@ -15,7 +15,7 @@ const innerEvents = [
  * import Channel from 'chnl';
  *
  * // create channel
- * const onMyEvent = new Channel.EventEmitter();
+ * const onMyEvent = new Channel();
  * // listen
  * onMyEvent.addListener(data => console.log(data));
  * // dispatch data
