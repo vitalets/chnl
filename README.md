@@ -5,15 +5,15 @@
 
 > Chrome compatible JavaScript event channels
 
-Implementation of event channels (aka pub/sub, dispatcher, emitter) inspired and 
+Implementation of event channels (pub/sub, dispatcher, emitter) inspired and 
 compatible with [Chrome extensions events API](https://developer.chrome.com/extensions/events#type-Event).
 
-## Installation
+## Install
 ```
 npm i chnl --save
 ```
 
-## Documentation
+## Docs
 https://vitalets.github.io/chnl
 
 ## Usage
@@ -22,18 +22,20 @@ https://vitalets.github.io/chnl
 import Channel from 'chnl';
 
 // create channel
-const myChannel = exports.myChannel = new Channel();
+export const myChannel = new Channel();
 
-// dispatch event
-setTimeout(() => myChannel.dispatch(data), 1000);
+// dispatch event with data
+setTimeout(() => {
+  myChannel.dispatch({foo: 'bar'});
+}, 1000);
 ```
 
 **module B**
 ```js
-import moduleA from './moduleA';
+import {myChannel} from './moduleA';
 
-// subscribe on channel and listen events
-moduleA.myChannel.addListener(data => console.log('myChannel event come with data', data));
+// subscribe on channel and log event data
+myChannel.addListener(data => console.log('myChannel event come with data', data));
 ```
 
 ## License
