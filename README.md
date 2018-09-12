@@ -15,25 +15,23 @@ npm i chnl --save
 https://vitalets.github.io/chnl
 
 ## Usage
-**module A**
+**foo.js**
 ```js
 import Channel from 'chnl';
 
 // create channel
 export const myChannel = new Channel();
 
-// dispatch event with data
-setTimeout(() => {
-  myChannel.dispatch({foo: 'bar'});
-}, 1000);
+// subscribe to channel
+myChannel.addListener(data => console.log(data));
 ```
 
-**module B**
+**bar.js**
 ```js
-import {myChannel} from './moduleA';
+import {myChannel} from './foo';
 
-// subscribe on channel and log event data
-myChannel.addListener(data => console.log('myChannel event come with data', data));
+// dispatch event to channel
+setTimeout(() => myChannel.dispatch({foo: 'bar'}), 1000);
 ```
 
 ## License
