@@ -9,7 +9,6 @@
   },
   "scripts": {
     "eslint": "eslint src test",
-    "eslint-staged": "lint-staged",
     "check-deps": "check-dependencies",
     "code": "npm run check-deps && npm run eslint",
     "test": "ava",
@@ -23,7 +22,7 @@
     "release": "npm run code && npm test && npm version $VER && npm publish && npm run docs-commit && git push --follow-tags --no-verify",
     "release-patch": "VER=patch npm run release",
     "release-minor": "VER=minor npm run release",
-    "precommit": "npm run eslint-staged && npm test",
+    "precommit": "lint-staged && npm test",
     "prepush": "npm run code && npm test",
     "prepublish": "npm run babel && npm run test"
   },
