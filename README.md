@@ -3,8 +3,6 @@
 [![npm version](https://badge.fury.io/js/chnl.svg)](https://badge.fury.io/js/chnl)
 [![license](https://img.shields.io/npm/l/chnl.svg)](https://www.npmjs.com/package/chnl)
 
-> Chrome compatible JavaScript event channels
-
 Implementation of event channels (pub/sub, dispatcher, emitter) inspired and 
 compatible with [Chrome extensions events API](https://developer.chrome.com/extensions/events#type-Event).
 
