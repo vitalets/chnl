@@ -20,18 +20,18 @@ https://vitalets.github.io/chnl
 import Channel from 'chnl';
 
 // create channel
-export const myChannel = new Channel();
+export const onData = new Channel();
 
 // subscribe to channel
-myChannel.addListener(data => console.log(data));
+onData.addListener(data => console.log(data));
 ```
 
 **bar.js**
 ```js
-import {myChannel} from './foo';
+import {onData} from './foo';
 
 // dispatch event to channel
-setTimeout(() => myChannel.dispatch({foo: 'bar'}), 1000);
+onData.dispatch({foo: 'bar'});
 ```
 
 ## License
