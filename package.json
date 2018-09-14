@@ -3,6 +3,7 @@
   "version": "0.4.0",
   "description": "Implementation of event channels compatible with Chrome extensions events API",
   "main": "./es5/index.js",
+  "types": "./types/index.d.js",
   "author": {
     "name": "Vitaliy Potapov",
     "email": "noginsk@rambler.ru"
@@ -18,13 +19,16 @@
     "docs": "CMD=build npm run docs-base",
     "docs-serve": "CMD=serve npm run docs-base -- --watch",
     "docs-commit": "npm run docs && git add docs && git commit -m\"docs\"",
-    "babel": "rm -rf ./es5 && babel ./src --out-dir ./es5",
-    "release": "npm run code && npm test && npm version $VER && npm publish && npm run docs-commit && git push --follow-tags --no-verify",
+    "clear": "rm -rf ./es5",
+    "babel": "babel ./src --out-dir ./es5",
+    "build": "npm run clear && npm run babel",
+    "prerelease": "npm run code && npm run build && npm run test",
+    "release": "npm version $VER && npm publish",
+    "postrelease": "npm run docs-commit && git push --follow-tags --no-verify",
     "release-patch": "VER=patch npm run release",
     "release-minor": "VER=minor npm run release",
     "precommit": "lint-staged && npm test",
-    "prepush": "npm run code && npm test",
-    "prepublish": "npm run babel && npm run test"
+    "prepush": "npm run code && npm test"
   },
   "lint-staged": {
     "{src,test}/**/*.js": "eslint"
