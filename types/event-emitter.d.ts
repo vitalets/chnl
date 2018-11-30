@@ -1,6 +1,6 @@
 
-type EventEmitterMethod = (event: string, callback: () => void, context?: any) => void;
-type EventEmitterBooleanMethod = (event: string, callback: () => void, context?: any) => boolean;
+type EventEmitterMethod = (event: string, callback: (...args: any[]) => any, context?: any) => void;
+type EventEmitterBooleanMethod = (event: string, callback: (...args: any[]) => any, context?: any) => boolean;
 
 export = EventEmitter;
 

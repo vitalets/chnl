@@ -1,6 +1,6 @@
 
-type ChannelMethod = (callback: () => void, context?: any) => void;
-type ChannelBooleanMethod = (callback: () => void, context?: any) => boolean;
+type ChannelMethod = (callback: (...args: any[]) => any, context?: any) => void;
+type ChannelBooleanMethod = (callback: (...args: any[]) => any, context?: any) => boolean;
 
 export = Channel;
 

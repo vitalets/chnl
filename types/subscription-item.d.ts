@@ -5,7 +5,7 @@ export = SubscriptionItem;
 
 interface SubscriptionItemParams {
     channel: Channel;
-    listener: () => void;
+    listener: (...args: any[]) => any;
     event?: string;
 }
 
