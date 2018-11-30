@@ -17,4 +17,8 @@ declare class Channel {
     dispatchAsync(...args: any[]): void;
     mute(options?: object): void;
     unmute(): void;
+    onListenerAdded: Channel;
+    onListenerRemoved: Channel;
+    onFirstListenerAdded: Channel;
+    onLastListenerRemoved: Channel;
 }
