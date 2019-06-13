@@ -10,4 +10,4 @@ npm-debug.log
 /coverage
 
 # Lib
-es5/
+dist/
