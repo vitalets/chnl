@@ -141,7 +141,6 @@ export default class Channel {
    */
   _invokeListeners(options = {args: [], async: false}) {
     if (!this._mute) {
-      // ToDo: block adding/removing listeners to channel (throw an error) during dispatch operation
       const listnersToInvoke = this._listeners.slice();
       listnersToInvoke.forEach(listener => {
         this._invokeListener(listener, options);
