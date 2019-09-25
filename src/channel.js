@@ -24,6 +24,7 @@ const innerEvents = [
 export default class Channel {
   constructor(name, noInnerEvents) {
     this._listeners = [];
+    this._proxyChannels = [];
     this._mute = false;
     this._accumulate = false;
     this._accumulatedEvents = [];
@@ -98,6 +99,7 @@ export default class Channel {
    */
   dispatch(...args) {
     this._invokeListeners({args, async: false});
+    this._proxyChannels.forEach(channel => channel.dispatch(...args));
   }
 
   /**
@@ -105,6 +107,7 @@ export default class Channel {
    */
   dispatchAsync(...args) {
     this._invokeListeners({args, async: true});
+    this._proxyChannels.forEach(channel => channel.dispatchAsync(...args));
   }
 
   /**
@@ -131,6 +134,14 @@ export default class Channel {
       this._dispatchAccumulated();
       this._accumulate = false;
     }
+  }
+
+  /**
+   * Register the channel to which events should be proxied
+   * @param {Channel} channel
+   */
+  addProxyChannel(channel) {
+    this._proxyChannels.push(channel);
   }
 
   /**

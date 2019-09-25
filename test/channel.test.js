@@ -166,3 +166,24 @@ test('should correctly add and remove listeners in dispatching loop', t => {
   t.truthy(channel.hasListener(spy3));
   t.truthy(channel.hasListener(spy4));
 });
+
+test('should proxy events to registered channels', t => {
+  const clock = sinon.useFakeTimers();
+  const channel = new Channel();
+  const proxyChannel = new Channel();
+  const spy1 = sinon.spy();
+  const spy2 = sinon.spy();
+  channel.addListener(spy1);
+  proxyChannel.addListener(spy2);
+  channel.addProxyChannel(proxyChannel);
+  t.is(spy1.callCount, 0);
+  channel.dispatch();
+  t.is(spy1.callCount, 1);
+  t.is(spy2.callCount, 1);
+  channel.dispatchAsync();
+  t.is(spy1.callCount, 1);
+  t.is(spy2.callCount, 1);
+  clock.tick(0);
+  t.is(spy1.callCount, 2);
+  t.is(spy2.callCount, 2);
+});
