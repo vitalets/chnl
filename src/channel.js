@@ -2,7 +2,7 @@ const innerEvents = [
   'onListenerAdded',
   'onListenerRemoved',
   'onFirstListenerAdded',
-  'onLastListenerRemoved',
+  'onLastListenerRemoved'
 ];
 
 /**
@@ -24,7 +24,6 @@ const innerEvents = [
 export default class Channel {
   constructor(name, noInnerEvents) {
     this._listeners = [];
-    this._proxyChannels = [];
     this._mute = false;
     this._accumulate = false;
     this._accumulatedEvents = [];
