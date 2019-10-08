@@ -173,7 +173,7 @@ test('should add proxy channel', t => {
   const proxyChannel = new Channel();
   const spy = sinon.spy();
   proxyChannel.addListener(spy);
-  channel.addProxyChannel(proxyChannel);
+  channel.proxyTo(proxyChannel);
   t.is(spy.callCount, 0);
   channel.dispatch();
   t.is(spy.callCount, 1);
@@ -182,61 +182,4 @@ test('should add proxy channel', t => {
   clock.tick(0);
   t.is(spy.callCount, 2);
   clock.restore();
-});
-
-test('should remove proxy channel', t => {
-  const channel = new Channel;
-  const proxyChannel = new Channel;
-  const spy = sinon.spy();
-  proxyChannel.addListener(spy);
-  channel.addProxyChannel(proxyChannel);
-  channel.dispatch();
-  t.is(spy.callCount, 1);
-  channel.removeProxyChannel(proxyChannel);
-  channel.dispatch();
-  t.is(spy.callCount, 1);
-});
-
-test('should remove all proxy channels', t => {
-  const channel = new Channel;
-  const proxyChannel1 = new Channel;
-  const proxyChannel2 = new Channel;
-  const spy1 = sinon.spy();
-  const spy2 = sinon.spy();
-  proxyChannel1.addListener(spy1);
-  proxyChannel2.addListener(spy2);
-  channel.addProxyChannel(proxyChannel1);
-  channel.addProxyChannel(proxyChannel2);
-  channel.dispatch();
-  t.is(spy1.callCount, 1);
-  t.is(spy2.callCount, 1);
-  channel.removeAllProxyChannels();
-  channel.dispatch();
-  t.is(spy1.callCount, 1);
-  t.is(spy2.callCount, 1);
-});
-
-test('should check proxy channel existance', t => {
-  const channel = new Channel;
-  const proxyChannel1 = new Channel;
-  const proxyChannel2 = new Channel;
-  const spy1 = sinon.spy();
-  const spy2 = sinon.spy();
-  proxyChannel1.addListener(spy1);
-  proxyChannel2.addListener(spy2);
-  t.false(channel.hasProxyChannel(proxyChannel1));
-  t.false(channel.hasProxyChannels());
-  channel.addProxyChannel(proxyChannel1);
-  channel.addProxyChannel(proxyChannel2);
-  t.true(channel.hasProxyChannel(proxyChannel1));
-  t.true(channel.hasProxyChannel(proxyChannel2));
-  t.true(channel.hasProxyChannels());
-  channel.removeProxyChannel(proxyChannel2);
-  t.true(channel.hasProxyChannel(proxyChannel1));
-  t.false(channel.hasProxyChannel(proxyChannel2));
-  t.true(channel.hasProxyChannels());
-  channel.removeProxyChannel(proxyChannel1);
-  t.false(channel.hasProxyChannel(proxyChannel1));
-  t.false(channel.hasProxyChannel(proxyChannel2));
-  t.false(channel.hasProxyChannels());
 });

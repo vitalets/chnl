@@ -1,12 +1,8 @@
 const innerEvents = [
   'onListenerAdded',
   'onListenerRemoved',
-  'onProxyChannelAdded',
-  'onProxyChannelRemoved',
   'onFirstListenerAdded',
   'onLastListenerRemoved',
-  'onFirstProxyChannelAdded',
-  'onLastProxyChannelRemoved'
 ];
 
 /**
@@ -61,8 +57,9 @@ export default class Channel {
    * Register the channel to which events should be proxied.
    * @param {Channel} channel
    */
-  addProxyChannel(channel) {
-    this._proxyChannels.push(channel);
+  proxyTo(channel) {
+    this._ensureChannel(channel);
+    this.addListener((...args) => channel.dispatch(...args));
   }
 
   /**
@@ -88,27 +85,6 @@ export default class Channel {
   }
 
   /**
-   * Remove proxy channel from list.
-   * @param {Channel} channel
-   */
-  removeProxyChannel(channel) {
-    this._ensureChannel(channel);
-    const index = this._indexOfProxyChannel(channel);
-    if (index >= 0) {
-      this._spliceProxyChannel(index);
-    }
-  }
-
-  /**
-   * Remove all proxy channels.
-   */
-  removeAllProxyChannels() {
-    while (this.hasProxyChannels()) {
-      this._spliceProxyChannel(0);
-    }
-  }
-
-  /**
    * Is listener exist.
    * @param {Function} callback
    * @param {Object} [context]
@@ -128,28 +104,10 @@ export default class Channel {
   }
 
   /**
-   * Is proxy channel exist.
-   * @param {Channel} channel
-   */
-  hasProxyChannel(channel) {
-    this._ensureChannel(channel);
-    return this._indexOfProxyChannel(channel) >= 0;
-  }
-
-  /**
-   * Are there any proxy channels.
-   * @returns {Boolean}
-   */
-  hasProxyChannels() {
-    return this._proxyChannels.length > 0;
-  }
-
-  /**
    * Call all listeners with specified params.
    */
   dispatch(...args) {
     this._invokeListeners({args, async: false});
-    this._proxyChannels.forEach(channel => channel.dispatch(...args));
   }
 
   /**
@@ -157,7 +115,6 @@ export default class Channel {
    */
   dispatchAsync(...args) {
     this._invokeListeners({args, async: true});
-    this._proxyChannels.forEach(channel => channel.dispatchAsync(...args));
   }
 
   /**
@@ -247,7 +204,7 @@ export default class Channel {
    * Dispatch inner events when listener is added.
    * @private
    */
-  _dispatchInnerAddListenerEvents() {
+  _dispatchInnerAddEvents() {
     if (!this._noInnerEvents) {
       this.onListenerAdded.dispatch.apply(this.onListenerAdded, arguments);
       if (this._listeners.length === 1) {
@@ -260,37 +217,11 @@ export default class Channel {
    * Dispatch inner events when listener is removed.
    * @private
    */
-  _dispatchInnerRemoveListenerEvents() {
+  _dispatchInnerRemoveEvents() {
     if (!this._noInnerEvents) {
       this.onListenerRemoved.dispatch.apply(this.onListenerRemoved, arguments);
       if (this._listeners.length === 0) {
         this.onLastListenerRemoved.dispatch.apply(this.onLastListenerRemoved, arguments);
-      }
-    }
-  }
-
-  /**
-   * Dispatch inner events when proxy channel is added.
-   * @private
-   */
-  _dispatchInnerAddProxyChannelEvents() {
-    if (!this._noInnerEvents) {
-      this.onProxyChannelAdded.dispatch.apply(this.onProxyChannelAdded, arguments);
-      if (this._proxyChannels.length === 1) {
-        this.onFirstProxyChannelAdded.dispatch.apply(this.onFirstProxyChannelAdded, arguments);
-      }
-    }
-  }
-
-  /**
-   * Dispatch inner events when proxy channel is removed.
-   * @private
-   */
-  _dispatchInnerRemoveProxyChannelEvents() {
-    if (!this._noInnerEvents) {
-      this.onProxyChannelRemoved.dispatch.apply(this.onProxyChannelRemoved, arguments);
-      if (this._proxyChannels.length === 0) {
-        this.onLastProxyChannelRemoved.dispatch.apply(this.onLastProxyChannelRemoved, arguments);
       }
     }
   }
@@ -314,15 +245,6 @@ export default class Channel {
   }
 
   /**
-   * Find proxy channel index.
-   * @param {Channel} channel
-   * @private
-   */
-  _indexOfProxyChannel(channel) {
-    return this._proxyChannels.indexOf(channel);
-  }
-
-  /**
    * Dispatch accumulated events.
    * @private
    */
@@ -341,20 +263,7 @@ export default class Channel {
   _pushListener(callback, context, once) {
     this._ensureFunction(callback);
     this._listeners.push({callback, context, once});
-    this._dispatchInnerAddListenerEvents.apply(this, arguments);
-  }
-
-  /**
-   * Pushes proxy channel.
-   * @param {Channel} channel
-   * @private
-   */
-  _pushProxyChannel(channel) {
-    this._ensureChannel(channel);
-    if (!this.hasProxyChannel(channel)) {
-      this._proxyChannels.push(channel);
-    }
-    this._dispatchInnerAddProxyChannelEvents.apply(this, arguments);
+    this._dispatchInnerAddEvents.apply(this, arguments);
   }
 
   /**
@@ -369,17 +278,6 @@ export default class Channel {
     if (listener.context) {
       args.push(listener.context);
     }
-    this._dispatchInnerRemoveListenerEvents.apply(this, args);
-  }
-
-  /**
-   * Splice proxy channel under index.
-   * @param {Number} index
-   * @private
-   */
-  _spliceProxyChannel(index) {
-    const proxyChannel = this._proxyChannels[index];
-    this._proxyChannels = this._proxyChannels.filter((_, i) => i !== index);
-    this._dispatchInnerRemoveProxyChannelEvents.apply(this, proxyChannel);
+    this._dispatchInnerRemoveEvents.apply(this, args);
   }
 }
