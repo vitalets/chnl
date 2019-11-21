@@ -1,6 +1,7 @@
-import banner from 'rollup-plugin-banner';
 import analyze from 'rollup-plugin-analyzer';
 import pkg from './package.json';
+
+const banner = `/* ${pkg.name} v${pkg.version} by ${pkg.author.name} */`;
 
 export default [
   {
@@ -8,9 +9,9 @@ export default [
     output: {
       file: pkg.main,
       format: 'cjs',
+      banner,
     },
     plugins: [
-      getBanner(),
       analyze({summaryOnly: true}), // analyze once
     ]
   },
@@ -18,14 +19,8 @@ export default [
     input: 'src/index.js',
     output: {
       file: pkg.module,
-      format: 'es'
+      format: 'es',
+      banner
     },
-    plugins: [
-      getBanner(),
-    ]
   }
 ];
-
-function getBanner() {
-  return banner('<%= pkg.name %> v<%= pkg.version %> by <%= pkg.author.name %>');
-}
