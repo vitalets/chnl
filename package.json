@@ -1,6 +1,6 @@
 {
   "name": "chnl",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Implementation of event channels compatible with Chrome extensions events API",
   "main": "dist/channel.cjs.js",
   "module": "dist/channel.esm.js",
