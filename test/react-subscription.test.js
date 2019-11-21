@@ -1,6 +1,6 @@
 import test from 'ava';
 import sinon from 'sinon';
-import Channel from '../src';
+import Channel from '../';
 
 class TestComponent {
   constructor() {

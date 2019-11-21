@@ -1,6 +1,6 @@
 import test from 'ava';
-import Channel from '../src';
 import sinon from 'sinon';
+import Channel from '../';
 
 test('should call listeners', t => {
   const channel = new Channel();

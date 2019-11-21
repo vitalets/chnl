@@ -2,7 +2,8 @@
   "name": "chnl",
   "version": "0.5.0",
   "description": "Implementation of event channels compatible with Chrome extensions events API",
-  "main": "./dist/bundle.umd.js",
+  "main": "dist/channel.cjs.js",
+  "module": "dist/channel.esm.js",
   "types": "./types/index.d.js",
   "author": {
     "name": "Vitaliy Potapov",
@@ -10,7 +11,7 @@
   },
   "scripts": {
     "code": "eslint src test",
-    "test": "ava",
+    "test": "npm run build && ava",
     "build": "rollup -c",
     "ci": "npm run code && npm test",
     "coveralls": "coveralls < coverage/lcov.info",
@@ -18,9 +19,9 @@
     "docs": "CMD=build npm run docs-base",
     "docs-serve": "CMD=serve npm run docs-base -- --watch",
     "docs-commit": "npm run docs && git add docs && git commit -m\"docs\"",
-    "prerelease": "npm run code && npm run build && npm run test",
-    "release": "npm version $VER && npm publish",
+    "prerelease": "npm run code && npm run test",
     "postrelease": "npm run docs-commit && git push --follow-tags --no-verify",
+    "release": "npm version $VER && npm publish",
     "release-patch": "VER=patch npm run release",
     "release-minor": "VER=minor npm run release"
   },
@@ -34,31 +35,20 @@
     }
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.7.1",
-    "@babel/register": "^7.7.0",
     "ava": "^2.4.0",
-    "babel-eslint": "^10.0.3",
     "coveralls": "^3.0.8",
     "documentation": "^12.1.4",
     "eslint": "^6.6.0",
     "eslint-plugin-ava": "^9.0.0",
-    "eslint-plugin-babel": "^5.3.0",
     "husky": "^3.1.0",
     "lint-staged": "^9.4.3",
     "rollup": "^1.27.3",
-    "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-banner": "^0.2.1",
     "sinon": "^7.5.0"
   },
   "ava": {
     "files": [
       "test/*.test.js"
-    ],
-    "source": [
-      "src/*.js"
-    ],
-    "require": [
-      "./test/_register.js"
     ],
     "verbose": true
   },

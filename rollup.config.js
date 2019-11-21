@@ -1,17 +1,13 @@
 import banner from 'rollup-plugin-banner';
-import babel from 'rollup-plugin-babel';
+import pkg from './package.json';
 
 export default {
   input: 'src/index.js',
-  output: {
-    file: 'dist/bundle.umd.js',
-    name: 'Channel',
-    format: 'umd'
-  },
+  output: [
+    { file: pkg.main, format: 'cjs' },
+    { file: pkg.module, format: 'es' }
+  ],
   plugins: [
-    babel({
-      exclude: 'node_modules/**'
-    }),
     banner('<%= pkg.name %> v<%= pkg.version %> by <%= pkg.author.name %>')
   ]
 };
