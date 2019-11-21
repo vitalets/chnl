@@ -15,12 +15,13 @@ export default [
       analyze({summaryOnly: true}), // analyze once
     ]
   },
-  {
-    input: 'src/index.js',
-    output: {
-      file: pkg.module,
-      format: 'es',
-      banner
-    },
-  }
+  // disable esm build as it breaks in transitive dependency: e.g. app -> some-lib -> chnl
+  // {
+  //   input: 'src/index.js',
+  //   output: {
+  //     file: pkg.module,
+  //     format: 'es',
+  //     banner
+  //   },
+  // }
 ];
