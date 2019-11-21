@@ -1,5 +1,3 @@
-.npmignore
-.babelrc
 .editorconfig
 .eslintrc
 .idea
@@ -7,3 +5,5 @@
 /coverage
 /test
 /docs
+/documentation.yml
+/rollup.config.js
