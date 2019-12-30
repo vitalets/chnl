@@ -1,4 +1,5 @@
 import analyze from 'rollup-plugin-analyzer';
+import babel from 'rollup-plugin-babel';
 import pkg from './package.json';
 
 const banner = `/* ${pkg.name} v${pkg.version} by ${pkg.author.name} */`;
@@ -12,6 +13,9 @@ export default [
       banner,
     },
     plugins: [
+      babel({
+        exclude: 'node_modules/**' // only transpile our source code
+      }),
       analyze({summaryOnly: true}), // analyze once
     ]
   },

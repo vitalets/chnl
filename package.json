@@ -39,6 +39,8 @@
     }
   },
   "devDependencies": {
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
     "ava": "^2.4.0",
     "coveralls": "^3.0.9",
     "documentation": "^12.1.4",
@@ -48,6 +50,7 @@
     "lint-staged": "^9.5.0",
     "rollup": "^1.27.14",
     "rollup-plugin-analyzer": "^3.2.2",
+    "rollup-plugin-babel": "^4.3.3",
     "sinon": "^8.0.1"
   },
   "ava": {
