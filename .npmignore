@@ -1,9 +1,0 @@
-.editorconfig
-.eslintrc
-.idea
-.travis.yml
-/coverage
-/test
-/docs
-/documentation.yml
-/rollup.config.js

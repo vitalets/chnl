@@ -4,6 +4,12 @@
   "description": "Implementation of event channels compatible with Chrome extensions events API",
   "main": "dist/channel.cjs.js",
   "types": "./types/index.d.js",
+  "files": [
+    "dist/",
+    "src/",
+    "types/",
+    "README.md"
+  ],
   "author": {
     "name": "Vitaliy Potapov",
     "email": "noginsk@rambler.ru"
