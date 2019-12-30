@@ -108,7 +108,7 @@ test('should not call listener after mute and call after unmute', t => {
   t.is(spy.callCount, 1);
 });
 
-test('should check listener existance', t => {
+test('should check listener existence', t => {
   const channel = new Channel();
   const spy = sinon.spy();
   channel.addListener(spy);
