@@ -1,8 +1,9 @@
 import analyze from 'rollup-plugin-analyzer';
 import babel from 'rollup-plugin-babel';
+import { uglify } from 'rollup-plugin-uglify';
 import pkg from './package.json';
 
-const banner = `/* ${pkg.name} v${pkg.version} by ${pkg.author.name} */`;
+const banner = `/* ${pkg.name} v${pkg.version} by ${pkg.author.name} @preserve */`;
 
 export default [
   {
@@ -15,6 +16,11 @@ export default [
     plugins: [
       babel({
         exclude: 'node_modules/**' // only transpile our source code
+      }),
+      uglify({
+        output: {
+          comments: /@preserve/,
+        }
       }),
       analyze({summaryOnly: true}), // analyze once
     ]
