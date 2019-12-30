@@ -21,7 +21,7 @@
     "ci": "npm run code && npm test",
     "coveralls": "coveralls < coverage/lcov.info",
     "docs:build": "npx documentation build src/** -f html -o docs --github --document-exported --infer-private=\"^_\" -c documentation.yml",
-    "docs:serve": "npx documentation serve src/** -f html --watch --github --document-exported --infer-private=\"^_\" -c documentation.yml",
+    "docs:view": "open docs/index.html",
     "docs:commit": "npm run docs:build && git add docs && git commit -m\"docs\"",
     "prerelease": "npm run code && npm run test",
     "postrelease": "npm run docs:commit && git push --follow-tags --no-verify",

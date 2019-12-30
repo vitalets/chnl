@@ -181,8 +181,8 @@ export default class Channel {
    */
   _invokeListeners(options = {args: [], async: false}) {
     if (!this._mute) {
-      const listnersToInvoke = this._listeners.slice();
-      listnersToInvoke.forEach(listener => {
+      const listenersToInvoke = this._listeners.slice();
+      listenersToInvoke.forEach(listener => {
         this._invokeListener(listener, options);
         if (listener.once) {
           this.removeListener(listener.callback, listener.context)
@@ -222,12 +222,12 @@ export default class Channel {
    * Dispatch inner events when listener is added
    * @private
    */
-  _dispatchInnerAddEvents() {
-    if (!this._noInnerEvents) {
-      this.onListenerAdded.dispatch.apply(this.onListenerAdded, arguments);
-      if (this._listeners.length === 1) {
-        this.onFirstListenerAdded.dispatch.apply(this.onFirstListenerAdded, arguments);
-      }
+  _dispatchInnerAddEvents(...args) {
+    if (this._onListenerAdded) {
+      this._onListenerAdded.dispatch(...args);
+    }
+    if (this._onFirstListenerAdded && this._listeners.length === 1) {
+      this._onFirstListenerAdded.dispatch(...args);
     }
   }
 
@@ -235,12 +235,12 @@ export default class Channel {
    * Dispatch inner events when listener is removed
    * @private
    */
-  _dispatchInnerRemoveEvents() {
-    if (!this._noInnerEvents) {
-      this.onListenerRemoved.dispatch.apply(this.onListenerRemoved, arguments);
-      if (this._listeners.length === 0) {
-        this.onLastListenerRemoved.dispatch.apply(this.onLastListenerRemoved, arguments);
-      }
+  _dispatchInnerRemoveEvents(...args) {
+    if (this._onListenerRemoved) {
+      this._onListenerRemoved.dispatch(...args);
+    }
+    if (this._onLastListenerRemoved && this._listeners.length === 0) {
+      this._onLastListenerRemoved.dispatch(...args);
     }
   }
 
@@ -280,7 +280,7 @@ export default class Channel {
   _pushListener(callback, context, once) {
     this._ensureFunction(callback);
     this._listeners.push({callback, context, once});
-    this._dispatchInnerAddEvents.apply(this, arguments);
+    this._dispatchInnerAddEvents(callback, context, once);
   }
 
   /**
@@ -294,6 +294,6 @@ export default class Channel {
     if (listener.context) {
       args.push(listener.context);
     }
-    this._dispatchInnerRemoveEvents.apply(this, args);
+    this._dispatchInnerRemoveEvents(...args);
   }
 }

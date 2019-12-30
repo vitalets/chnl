@@ -6,7 +6,7 @@ export = Channel;
 
 declare class Channel {
     static Subscription: any;
-    constructor(name?: string, noInnerEvents?: boolean);
+    constructor(name?: string);
     addListener: ChannelMethod;
     addOnceListener: ChannelMethod;
     removeListener: ChannelMethod;
