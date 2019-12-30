@@ -288,12 +288,8 @@ export default class Channel {
    * @param {Number} index
    */
   _spliceListener(index) {
-    const listener = this._listeners[index];
+    const {callback, context, once} = this._listeners[index];
     this._listeners.splice(index, 1);
-    const args = [listener.callback];
-    if (listener.context) {
-      args.push(listener.context);
-    }
-    this._dispatchInnerRemoveEvents(...args);
+    this._dispatchInnerRemoveEvents(callback, context, once);
   }
 }
