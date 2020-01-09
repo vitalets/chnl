@@ -25,7 +25,7 @@ test('should emit onListenerRemoved when .removeListener() called', t => {
   channel.removeListener(spy2);
   channel.removeListener(notListener);
   t.is(spy.callCount, 1);
-  t.deepEqual(spy.getCall(0).args, [spy2]);
+  t.deepEqual(spy.getCall(0).args, [spy2, undefined, false]);
 });
 
 test('should emit onFirstListenerAdded when .addListener() called first time', t => {
@@ -51,7 +51,7 @@ test('should emit onLastListenerRemoved when .removeListener() called on the las
   channel.removeListener(spy2);
   channel.removeListener(spy3);
   t.is(spy.callCount, 1);
-  t.deepEqual(spy.getCall(0).args, [spy3]);
+  t.deepEqual(spy.getCall(0).args, [spy3, undefined, false]);
 });
 
 test('should emit onListenerRemoved when .removeAllListeners() called', t => {
@@ -64,8 +64,8 @@ test('should emit onListenerRemoved when .removeAllListeners() called', t => {
   channel.addListener(spy2);
   channel.removeAllListeners();
   t.is(spy.callCount, 2);
-  t.deepEqual(spy.getCall(0).args, [spy1]);
-  t.deepEqual(spy.getCall(1).args, [spy2]);
+  t.deepEqual(spy.getCall(0).args, [spy1, undefined, false]);
+  t.deepEqual(spy.getCall(1).args, [spy2, undefined, false]);
 });
 
 test('should emit onLastListenerRemoved when .removeAllListeners() called', t => {
@@ -78,5 +78,5 @@ test('should emit onLastListenerRemoved when .removeAllListeners() called', t =>
   channel.addListener(spy2);
   channel.removeAllListeners();
   t.is(spy.callCount, 1);
-  t.deepEqual(spy.getCall(0).args, [spy2]);
+  t.deepEqual(spy.getCall(0).args, [spy2, undefined, false]);
 });

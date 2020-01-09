@@ -1,37 +1,77 @@
-const innerEvents = [
-  'onListenerAdded',
-  'onListenerRemoved',
-  'onFirstListenerAdded',
-  'onLastListenerRemoved'
-];
-
 /**
- * Channel of particular events. Allows attach/detach listeners and dispatch event data.
+ * Channel for events of particular type. Allows attach/detach listeners and dispatch event data.
  *
  * @param {String} [name]
- * @param {Boolean} [noInnerEvents]
  *
  * @example
  * import Channel from 'chnl';
  *
  * // create channel
- * const onMyEvent = new Channel();
+ * const onClick = new Channel();
  * // listen
- * onMyEvent.addListener(data => console.log(data));
+ * onClick.addListener(data => console.log(data));
  * // dispatch data
- * onMyEvent.dispatch(data);
+ * onClick.dispatch(data);
  */
 export default class Channel {
-  constructor(name, noInnerEvents) {
+  constructor(name) {
     this._listeners = [];
     this._mute = false;
     this._accumulate = false;
     this._accumulatedEvents = [];
     this._name = name || '';
-    this._noInnerEvents = Boolean(noInnerEvents);
-    if (!noInnerEvents) {
-      innerEvents.forEach(eventName => this[eventName] = new Channel(eventName, true));
+    this._onListenerAdded = null;
+    this._onFirstListenerAdded = null;
+    this._onListenerRemoved = null;
+    this._onLastListenerRemoved = null;
+  }
+
+  /**
+   * Triggers when listener is added to channel.
+   *
+   * @returns {Channel}
+   */
+  get onListenerAdded() {
+    if (!this._onListenerAdded) {
+      this._onListenerAdded = new Channel(`${this._name}:onListenerAdded`);
     }
+    return this._onListenerAdded;
+  }
+
+  /**
+   * Triggers when first listener is added to channel.
+   *
+   * @returns {Channel}
+   */
+  get onFirstListenerAdded() {
+    if (!this._onFirstListenerAdded) {
+      this._onFirstListenerAdded = new Channel(`${this._name}:onFirstListenerAdded`);
+    }
+    return this._onFirstListenerAdded;
+  }
+
+  /**
+   * Triggers when listener is removed from channel.
+   *
+   * @returns {Channel}
+   */
+  get onListenerRemoved() {
+    if (!this._onListenerRemoved) {
+      this._onListenerRemoved = new Channel(`${this._name}:onListenerRemoved`);
+    }
+    return this._onListenerRemoved;
+  }
+
+  /**
+   * Triggers when last listener is removed from channel.
+   *
+   * @returns {Channel}
+   */
+  get onLastListenerRemoved() {
+    if (!this._onLastListenerRemoved) {
+      this._onLastListenerRemoved = new Channel(`${this._name}:onLastListenerRemoved`);
+    }
+    return this._onLastListenerRemoved;
   }
 
   /**
@@ -141,8 +181,8 @@ export default class Channel {
    */
   _invokeListeners(options = {args: [], async: false}) {
     if (!this._mute) {
-      const listnersToInvoke = this._listeners.slice();
-      listnersToInvoke.forEach(listener => {
+      const listenersToInvoke = this._listeners.slice();
+      listenersToInvoke.forEach(listener => {
         this._invokeListener(listener, options);
         if (listener.once) {
           this.removeListener(listener.callback, listener.context)
@@ -182,12 +222,12 @@ export default class Channel {
    * Dispatch inner events when listener is added
    * @private
    */
-  _dispatchInnerAddEvents() {
-    if (!this._noInnerEvents) {
-      this.onListenerAdded.dispatch.apply(this.onListenerAdded, arguments);
-      if (this._listeners.length === 1) {
-        this.onFirstListenerAdded.dispatch.apply(this.onFirstListenerAdded, arguments);
-      }
+  _dispatchInnerAddEvents(...args) {
+    if (this._onListenerAdded) {
+      this._onListenerAdded.dispatch(...args);
+    }
+    if (this._onFirstListenerAdded && this._listeners.length === 1) {
+      this._onFirstListenerAdded.dispatch(...args);
     }
   }
 
@@ -195,12 +235,12 @@ export default class Channel {
    * Dispatch inner events when listener is removed
    * @private
    */
-  _dispatchInnerRemoveEvents() {
-    if (!this._noInnerEvents) {
-      this.onListenerRemoved.dispatch.apply(this.onListenerRemoved, arguments);
-      if (this._listeners.length === 0) {
-        this.onLastListenerRemoved.dispatch.apply(this.onLastListenerRemoved, arguments);
-      }
+  _dispatchInnerRemoveEvents(...args) {
+    if (this._onListenerRemoved) {
+      this._onListenerRemoved.dispatch(...args);
+    }
+    if (this._onLastListenerRemoved && this._listeners.length === 0) {
+      this._onLastListenerRemoved.dispatch(...args);
     }
   }
 
@@ -240,7 +280,7 @@ export default class Channel {
   _pushListener(callback, context, once) {
     this._ensureFunction(callback);
     this._listeners.push({callback, context, once});
-    this._dispatchInnerAddEvents.apply(this, arguments);
+    this._dispatchInnerAddEvents(callback, context, once);
   }
 
   /**
@@ -248,12 +288,8 @@ export default class Channel {
    * @param {Number} index
    */
   _spliceListener(index) {
-    const listener = this._listeners[index];
+    const {callback, context, once} = this._listeners[index];
     this._listeners.splice(index, 1);
-    const args = [listener.callback];
-    if (listener.context) {
-      args.push(listener.context);
-    }
-    this._dispatchInnerRemoveEvents.apply(this, args);
+    this._dispatchInnerRemoveEvents(callback, context, once);
   }
 }
