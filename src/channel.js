@@ -279,8 +279,20 @@ export default class Channel {
    */
   _pushListener(callback, context, once) {
     this._ensureFunction(callback);
+    this._checkForDuplicates(callback, context);
     this._listeners.push({callback, context, once});
     this._dispatchInnerAddEvents(callback, context, once);
+  }
+
+  /**
+   * Check for listeners duplicates
+   * @param {Function} callback
+   * @param {Object} context
+   */
+  _checkForDuplicates(callback, context) {
+    if (this.hasListener(callback, context)) {
+      throw new Error('Channel ' + this._name + ': duplicating listeners');
+    }
   }
 
   /**
