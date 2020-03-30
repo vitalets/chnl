@@ -166,3 +166,21 @@ test('should correctly add and remove listeners in dispatching loop', t => {
   t.truthy(channel.hasListener(spy3));
   t.truthy(channel.hasListener(spy4));
 });
+
+test('should throw when duplicating channel listeners', t => {
+  const channel = new Channel('channel');
+  const listener = () => {};
+  channel.addListener(listener);
+
+  t.throws(() => channel.addListener(listener));
+});
+
+test('should not throw when duplicating channel listeners with different context', t => {
+  const channel = new Channel('channel');
+  const listener = () => {};
+  const context1 = {};
+  const context2 = {};
+  channel.addListener(listener, context1);
+
+  t.notThrows(() => channel.addListener(listener, context2));
+});
