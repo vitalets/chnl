@@ -1,6 +1,6 @@
 import test from 'ava';
-import Channel from '../src';
 import sinon from 'sinon';
+import Channel from '../';
 
 test('should call listeners', t => {
   const channel = new Channel();
@@ -108,7 +108,7 @@ test('should not call listener after mute and call after unmute', t => {
   t.is(spy.callCount, 1);
 });
 
-test('should check listener existance', t => {
+test('should check listener existence', t => {
   const channel = new Channel();
   const spy = sinon.spy();
   channel.addListener(spy);
@@ -182,4 +182,22 @@ test('should add proxy channel', t => {
   clock.tick(0);
   t.is(spy.callCount, 2);
   clock.restore();
+});
+
+test('should throw when duplicating channel listeners', t => {
+  const channel = new Channel('channel');
+  const listener = () => {};
+  channel.addListener(listener);
+
+  t.throws(() => channel.addListener(listener));
+});
+
+test('should not throw when duplicating channel listeners with different context', t => {
+  const channel = new Channel('channel');
+  const listener = () => {};
+  const context1 = {};
+  const context2 = {};
+  channel.addListener(listener, context1);
+
+  t.notThrows(() => channel.addListener(listener, context2));
 });

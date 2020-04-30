@@ -1,26 +1,31 @@
 {
   "name": "chnl",
-  "version": "0.5.0",
+  "version": "1.1.1",
   "description": "Implementation of event channels compatible with Chrome extensions events API",
-  "main": "./dist/bundle.umd.js",
+  "main": "dist/channel.cjs.js",
   "types": "./types/index.d.js",
+  "files": [
+    "dist/",
+    "src/",
+    "types/",
+    "README.md"
+  ],
   "author": {
     "name": "Vitaliy Potapov",
     "email": "noginsk@rambler.ru"
   },
   "scripts": {
     "code": "eslint src test",
-    "test": "ava",
+    "test": "npm run build && ava",
     "build": "rollup -c",
     "ci": "npm run code && npm test",
     "coveralls": "coveralls < coverage/lcov.info",
-    "docs-base": "node_modules/documentation/bin/documentation.js $CMD src/** -f html -o docs -g --document-exported --infer-private=\"^_\" -c documentation.yml",
-    "docs": "CMD=build npm run docs-base",
-    "docs-serve": "CMD=serve npm run docs-base -- --watch",
-    "docs-commit": "npm run docs && git add docs && git commit -m\"docs\"",
-    "prerelease": "npm run code && npm run build && npm run test",
+    "docs:build": "npx documentation build src/** -f html -o docs --github --document-exported --infer-private=\"^_\" -c documentation.yml",
+    "docs:view": "open docs/index.html",
+    "docs:commit": "npm run docs:build && git add docs && git commit -m\"docs\"",
+    "prerelease": "npm run code && npm run test",
+    "postrelease": "npm run docs:commit && git push --follow-tags --no-verify",
     "release": "npm version $VER && npm publish",
-    "postrelease": "npm run docs-commit && git push --follow-tags --no-verify",
     "release-patch": "VER=patch npm run release",
     "release-minor": "VER=minor npm run release"
   },
@@ -34,31 +39,24 @@
     }
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.6.0",
-    "@babel/register": "^7.6.0",
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
     "ava": "^2.4.0",
-    "babel-eslint": "^10.0.3",
-    "coveralls": "^3.0.6",
-    "documentation": "^12.1.2",
-    "eslint": "^6.4.0",
-    "eslint-plugin-ava": "^8.0.0",
-    "eslint-plugin-babel": "^5.3.0",
-    "husky": "^3.0.5",
-    "lint-staged": "^9.2.5",
-    "rollup": "^1.21.4",
+    "coveralls": "^3.0.9",
+    "documentation": "^12.1.4",
+    "eslint": "^6.8.0",
+    "eslint-plugin-ava": "^9.0.0",
+    "husky": "^3.1.0",
+    "lint-staged": "^9.5.0",
+    "rollup": "^1.27.14",
+    "rollup-plugin-analyzer": "^3.2.2",
     "rollup-plugin-babel": "^4.3.3",
-    "rollup-plugin-banner": "^0.2.1",
-    "sinon": "^7.4.2"
+    "rollup-plugin-uglify": "^6.0.4",
+    "sinon": "^8.0.1"
   },
   "ava": {
     "files": [
       "test/*.test.js"
-    ],
-    "source": [
-      "src/*.js"
-    ],
-    "require": [
-      "./test/_register.js"
     ],
     "verbose": true
   },

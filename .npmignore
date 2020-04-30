@@ -1,9 +1,0 @@
-.npmignore
-.babelrc
-.editorconfig
-.eslintrc
-.idea
-.travis.yml
-/coverage
-/test
-/docs

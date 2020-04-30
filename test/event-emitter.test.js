@@ -1,6 +1,6 @@
 import test from 'ava';
-import Channel from '../src';
 import sinon from 'sinon';
+import Channel from '../';
 
 test.beforeEach(t => {
   t.context = new Channel.EventEmitter();
