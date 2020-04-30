@@ -1,3 +1,5 @@
+import Channel from './channel';
+
 /**
  * Subscription item
  * @private
@@ -9,7 +11,7 @@ export default class SubscriptionItem {
    * @param {Object} params
    * @param {Object} params.channel
    * @param {String} [params.event]
-   * @param {Function} params.listener
+   * @param {Function|Channel} params.listener
    */
   constructor(params) {
     this._params = params;
@@ -55,8 +57,8 @@ export default class SubscriptionItem {
     if (event && typeof event !== 'string') {
       throw new Error('Event should be string');
     }
-    if (!listener || typeof listener !== 'function') {
-      throw new Error('Listener should be function');
+    if (!listener || (typeof listener !== 'function' && !(listener instanceof Channel))) {
+      throw new Error('Listener should be function or Channel');
     }
   }
 }

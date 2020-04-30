@@ -1,6 +1,7 @@
+import Channel from './channel';
 
-type EventEmitterMethod = (event: string, callback: (...args: any[]) => any, context?: any) => void;
-type EventEmitterBooleanMethod = (event: string, callback: (...args: any[]) => any, context?: any) => boolean;
+type EventEmitterMethod = (event: string, callback: Channel | ((...args: any[]) => any), context?: any) => void;
+type EventEmitterBooleanMethod = (event: string, callback: Channel | ((...args: any[]) => any), context?: any) => boolean;
 
 export = EventEmitter;
 

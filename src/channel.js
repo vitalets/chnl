@@ -76,7 +76,7 @@ export default class Channel {
 
   /**
    * Add listener for event.
-   * @param {Function} callback
+   * @param {Function|Channel} callback
    * @param {Object} [context]
    */
   addListener(callback, context) {
@@ -85,7 +85,7 @@ export default class Channel {
 
   /**
    * Add once listener for event.
-   * @param {Function} callback
+   * @param {Function|Channel} callback
    * @param {Object} [context]
    */
   addOnceListener(callback, context) {
@@ -93,21 +93,12 @@ export default class Channel {
   }
 
   /**
-   * Register the channel to which events should be proxied.
-   * @param {Channel} channel
-   */
-  proxyTo(channel) {
-    this._ensureChannel(channel);
-    this.addListener((...args) => channel.dispatch(...args));
-  }
-
-  /**
    * Remove listener from event.
-   * @param {Function} callback
+   * @param {Function|Channel} callback
    * @param {Object} [context]
    */
   removeListener(callback, context) {
-    this._ensureFunction(callback);
+    this._ensureListener(callback);
     const index = this._indexOfListener(callback, context);
     if (index >= 0) {
       this._spliceListener(index);
@@ -125,12 +116,12 @@ export default class Channel {
 
   /**
    * Is listener exist.
-   * @param {Function} callback
+   * @param {Function|Channel} callback
    * @param {Object} [context]
    * @returns {Boolean}
    */
   hasListener(callback, context) {
-    this._ensureFunction(callback);
+    this._ensureListener(callback);
     return this._indexOfListener(callback, context) >= 0;
   }
 
@@ -210,32 +201,30 @@ export default class Channel {
    * @private
    */
   _invokeListener(listener, options) {
+    const isListenerChannel = listener.callback instanceof Channel;
     if (options.async) {
-      setTimeout(() => listener.callback.apply(listener.context, options.args), 0);
+      if (isListenerChannel) {
+        listener.callback.dispatchAsync(...options.args);
+      } else {
+        setTimeout(() => listener.callback.apply(listener.context, options.args), 0);
+      }
     } else {
-      listener.callback.apply(listener.context, options.args);
+      if (isListenerChannel) {
+        listener.callback.dispatch(...options.args);
+      } else {
+        listener.callback.apply(listener.context, options.args);
+      }
     }
   }
 
   /**
-   * Ensure function.
-   * @param {Function} callback
+   * Ensure listener.
+   * @param {Function|Channel} listener
    * @private
    */
-  _ensureFunction(callback) {
-    if (typeof callback !== 'function') {
-      throw new Error('Channel ' + this._name + ': listener is not a function');
-    }
-  }
-
-  /**
-   * Ensure Channel.
-   * @param {Channel} channel
-   * @private
-   */
-  _ensureChannel(channel) {
-    if (!(channel instanceof Channel)) {
-      throw new Error('Channel ' + this._name + ': proxyChannel doesn\'t instance of Channel');
+  _ensureListener(listener) {
+    if (typeof listener !== 'function' && !(listener instanceof Channel)) {
+      throw new Error('Channel ' + this._name + ': listener is not a function and not a Channel');
     }
   }
 
@@ -267,7 +256,7 @@ export default class Channel {
 
   /**
    * Find listener index.
-   * @param {Function} callback
+   * @param {Function|Channel} callback
    * @param {Object} [context]
    * @private
    */
@@ -275,9 +264,10 @@ export default class Channel {
     for (let i = 0; i < this._listeners.length; i++) {
       const listener = this._listeners[i];
       const equalCallbacks = listener.callback === callback;
+      const isListenerChannel = callback instanceof Channel;
       const emptyContexts = context === undefined && listener.context === undefined;
       const equalContexts = context === listener.context;
-      if (equalCallbacks && (emptyContexts || equalContexts)) {
+      if (equalCallbacks && (isListenerChannel || emptyContexts || equalContexts)) {
         return i;
       }
     }
@@ -294,25 +284,25 @@ export default class Channel {
 
   /**
    * Pushes listener.
-   * @param {Function} callback
+   * @param {Function|Channel} listener
    * @param {Object} context
    * @param {Boolean} once
    * @private
    */
-  _pushListener(callback, context, once) {
-    this._ensureFunction(callback);
-    this._checkForDuplicates(callback, context);
-    this._listeners.push({callback, context, once});
-    this._dispatchInnerAddEvents(callback, context, once);
+  _pushListener(listener, context, once) {
+    this._ensureListener(listener);
+    this._checkForDuplicates(listener, context);
+    this._listeners.push({callback: listener, context, once});
+    this._dispatchInnerAddEvents(listener, context, once);
   }
 
   /**
    * Check for listeners duplicates
-   * @param {Function} callback
+   * @param {Function|Channel} listener
    * @param {Object} context
    */
-  _checkForDuplicates(callback, context) {
-    if (this.hasListener(callback, context)) {
+  _checkForDuplicates(listener, context) {
+    if (this.hasListener(listener, context)) {
       throw new Error('Channel ' + this._name + ': duplicating listeners');
     }
   }

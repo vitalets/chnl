@@ -23,7 +23,7 @@ export default class EventEmitter {
    * Adds listener to specific event
    *
    * @param {String} event
-   * @param {Function} callback
+   * @param {Function|Channel} callback
    * @param {Object} [context]
    */
   addListener(event, callback, context) {
@@ -34,7 +34,7 @@ export default class EventEmitter {
    * Adds listener to specific event (alias to addListener)
    *
    * @param {String} event
-   * @param {Function} callback
+   * @param {Function|Channel} callback
    * @param {Object} [context]
    */
   on(event, callback, context) {
@@ -45,7 +45,7 @@ export default class EventEmitter {
    * Adds once listener to specific event
    *
    * @param {String} event
-   * @param {Function} callback
+   * @param {Function|Channel} callback
    * @param {Object} [context]
    */
   addOnceListener(event, callback, context) {
@@ -56,7 +56,7 @@ export default class EventEmitter {
    * Adds once listener to specific event (alias to addOnceListener)
    *
    * @param {String} event
-   * @param {Function} callback
+   * @param {Function|Channel} callback
    * @param {Object} [context]
    */
   once(event, callback, context) {
@@ -67,7 +67,7 @@ export default class EventEmitter {
    * Removes listener from specific event
    *
    * @param {String} event
-   * @param {Function} callback
+   * @param {Function|Channel} callback
    * @param {Object} [context]
    */
   removeListener(event, callback, context) {
@@ -78,7 +78,7 @@ export default class EventEmitter {
    * Removes listener from specific event (alias to removeListener)
    *
    * @param {String} event
-   * @param {Function} callback
+   * @param {Function|Channel} callback
    * @param {Object} [context]
    */
   off(event, callback, context) {
@@ -89,7 +89,7 @@ export default class EventEmitter {
    * Is listener exist for specific event
    *
    * @param {String} event
-   * @param {Function} callback
+   * @param {Function|Channel} callback
    * @param {Object} [context]
    * @returns {Boolean}
    */
@@ -101,7 +101,7 @@ export default class EventEmitter {
    * Is listener exist for specific event (alias to hasListener)
    *
    * @param {String} event
-   * @param {Function} callback
+   * @param {Function|Channel} callback
    * @param {Object} [context]
    * @returns {Boolean}
    */

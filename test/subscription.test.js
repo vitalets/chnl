@@ -69,7 +69,7 @@ test('should throw in case of incorrect listener', t => {
         listener: 'abc',
       }
     ]);
-  }, 'Listener should be function');
+  }, 'Listener should be function or Channel');
 });
 
 test('should throw in case of incorrect event', t => {
