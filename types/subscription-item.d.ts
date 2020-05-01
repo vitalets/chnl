@@ -1,11 +1,12 @@
 
 import Channel = require('./channel');
+import {Listener} from './general';
 
 export = SubscriptionItem;
 
 interface SubscriptionItemParams {
     channel: Channel;
-    listener: Channel | ((...args: any[]) => any);
+    listener: Listener;
     event?: string;
 }
 
