@@ -27,6 +27,16 @@ export default class Channel {
   }
 
   /**
+   * Check for the passed listener is valid.
+   *
+   * @param {*} listener
+   * @returns {Boolean}
+   */
+  static isValidListener(listener) {
+    return typeof listener === 'function' || listener instanceof Channel;
+  }
+
+  /**
    * Triggers when listener is added to channel.
    *
    * @returns {Channel}
@@ -223,7 +233,7 @@ export default class Channel {
    * @private
    */
   _ensureListener(listener) {
-    if (typeof listener !== 'function' && !(listener instanceof Channel)) {
+    if (!Channel.isValidListener(listener)) {
       throw new Error('Channel ' + this._name + ': listener is not a function and not a Channel');
     }
   }

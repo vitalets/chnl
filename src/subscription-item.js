@@ -57,7 +57,7 @@ export default class SubscriptionItem {
     if (event && typeof event !== 'string') {
       throw new Error('Event should be string');
     }
-    if (!listener || (typeof listener !== 'function' && !(listener instanceof Channel))) {
+    if (!listener || !Channel.isValidListener(listener)) {
       throw new Error('Listener should be function or Channel');
     }
   }
