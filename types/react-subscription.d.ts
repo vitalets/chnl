@@ -1,9 +1,9 @@
 
 import Subscription = require('./subscription');
-import SubscriptionItem = require('./subscription-item');
+import {SubscriptionItemParams} from './subscription-item';
 
 export = ReactSubscription;
 
 declare class ReactSubscription extends Subscription {
-    constructor(component: object, items: SubscriptionItem[]);
+    constructor(component: object, items: SubscriptionItemParams[]);
 }
