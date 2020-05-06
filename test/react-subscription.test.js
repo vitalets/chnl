@@ -1,6 +1,6 @@
-import test from 'ava';
-import sinon from 'sinon';
-import Channel from '../';
+const test = require('ava');
+const sinon = require('sinon');
+const Channel = require('../');
 
 class TestComponent {
   constructor() {

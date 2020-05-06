@@ -1,6 +1,6 @@
-import test from 'ava';
-import sinon from 'sinon';
-import Channel from '../';
+const test = require('ava');
+const sinon = require('sinon');
+const Channel = require('../');
 
 test('should manage listeners of channel', t => {
   const channel = new Channel();
@@ -58,7 +58,7 @@ test('should throw in case of incorrect channel', t => {
         channel: 'abc',
       }
     ]);
-  }, 'Channel should be object');
+  }, { message: 'Channel should be object' });
 });
 
 test('should throw in case of incorrect listener', t => {
@@ -69,7 +69,7 @@ test('should throw in case of incorrect listener', t => {
         listener: 'abc',
       }
     ]);
-  }, 'Listener should be function or Channel');
+  }, { message: 'Listener should be function or Channel' });
 });
 
 test('should throw in case of incorrect event', t => {
@@ -81,5 +81,5 @@ test('should throw in case of incorrect event', t => {
         event: {},
       }
     ]);
-  }, 'Event should be string');
+  }, { message: 'Event should be string' });
 });

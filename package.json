@@ -39,20 +39,20 @@
     }
   },
   "devDependencies": {
-    "@babel/core": "^7.7.7",
-    "@babel/preset-env": "^7.7.7",
-    "ava": "^2.4.0",
-    "coveralls": "^3.0.9",
-    "documentation": "^12.1.4",
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "ava": "^3.8.1",
+    "coveralls": "^3.1.0",
+    "documentation": "^12.3.0",
     "eslint": "^6.8.0",
-    "eslint-plugin-ava": "^9.0.0",
-    "husky": "^3.1.0",
-    "lint-staged": "^9.5.0",
-    "rollup": "^1.27.14",
+    "eslint-plugin-ava": "^10.3.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.2",
+    "rollup": "^2.8.0",
     "rollup-plugin-analyzer": "^3.2.2",
-    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-uglify": "^6.0.4",
-    "sinon": "^8.0.1"
+    "sinon": "^9.0.2"
   },
   "ava": {
     "files": [

@@ -1,6 +1,6 @@
-import test from 'ava';
-import sinon from 'sinon';
-import Channel from '../';
+const test = require('ava');
+const sinon = require('sinon');
+const Channel = require('../');
 
 test('should emit onListenerAdded when .addListener() called', t => {
   const channel = new Channel();
