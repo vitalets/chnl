@@ -1,5 +1,5 @@
 
-import Subscription = require('./subscription');
+import Subscription from './subscription';
 import {SubscriptionItemParams} from './subscription-item';
 
 export = ReactSubscription;
