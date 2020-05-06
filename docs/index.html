@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset='utf-8'>
-  <title>chnl 1.1.1 | Documentation</title>
+  <title>chnl 1.2.0 | Documentation</title>
   <meta name='description' content='Implementation of event channels compatible with Chrome extensions events API'>
   <meta name='viewport' content='width=device-width,initial-scale=1'>
   <link href='assets/bass.css' rel='stylesheet'>
@@ -15,11 +15,14 @@
       <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
         <div class='py1 px2'>
           <h3 class='mb0 no-anchor'>chnl</h3>
-          <div class='mb1'><code>1.1.1</code></div>
+          <div class='mb1'><code>1.2.0</code></div>
           <input
             placeholder='Filter'
             id='filter-input'
             class='col12 block input'
+            spellcheck='false'
+            autocapitalize='off'
+            autocorrect='off'
             type='text' />
           <div id='toc'>
             <ul class='list-reset h5 py1-ul'>
@@ -33,6 +36,17 @@
                 </a>
                 
                 <div class='toggle-target display-none'>
+                  
+                  <ul class='list-reset py1-ul pl1'>
+                    <li class='h5'><span>Static members</span></li>
+                    
+                      <li><a
+                        href='#channelisvalidlistener'
+                        class='regular pre-open'>
+                        .isValidListener
+                      </a></li>
+                    
+                    </ul>
                   
                   
                     <ul class='list-reset py1-ul pl1'>
@@ -282,7 +296,7 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/2685adb91b8344b707e2121ccdf3916f1aa84ac7/src/channel.js#L16-L307'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/1232d80675dfa004537e05795949a8e223d7c3e2/src/channel.js#L16-L330'>
       <span>src/channel.js</span>
       </a>
     
@@ -324,6 +338,8 @@
   
 
   
+
+  
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
@@ -337,6 +353,91 @@ onClick.addListener(<span class="hljs-function"><span class="hljs-params">data</
 onClick.dispatch(data);</pre>
     
   
+
+  
+    <div class='py1 quiet mt1 prose-big'>Static Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='channelisvalidlistener'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>isValidListener(listener)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/1232d80675dfa004537e05795949a8e223d7c3e2/src/channel.js#L35-L37'>
+      <span>src/channel.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Check for the passed listener is valid.</p>
+
+    <div class='pre p1 fill-light mt0'>isValidListener(listener: any): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>listener</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
 
   
 
@@ -358,7 +459,7 @@ onClick.dispatch(data);</pre>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/2685adb91b8344b707e2121ccdf3916f1aa84ac7/src/channel.js#L34-L39'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/1232d80675dfa004537e05795949a8e223d7c3e2/src/channel.js#L44-L49'>
       <span>src/channel.js</span>
       </a>
     
@@ -403,6 +504,8 @@ onClick.dispatch(data);</pre>
   
 
   
+
+  
 </section>
 
       </div>
@@ -422,7 +525,7 @@ onClick.dispatch(data);</pre>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/2685adb91b8344b707e2121ccdf3916f1aa84ac7/src/channel.js#L46-L51'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/1232d80675dfa004537e05795949a8e223d7c3e2/src/channel.js#L56-L61'>
       <span>src/channel.js</span>
       </a>
     
@@ -467,6 +570,8 @@ onClick.dispatch(data);</pre>
   
 
   
+
+  
 </section>
 
       </div>
@@ -486,7 +591,7 @@ onClick.dispatch(data);</pre>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/2685adb91b8344b707e2121ccdf3916f1aa84ac7/src/channel.js#L58-L63'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/1232d80675dfa004537e05795949a8e223d7c3e2/src/channel.js#L68-L73'>
       <span>src/channel.js</span>
       </a>
     
@@ -531,6 +636,8 @@ onClick.dispatch(data);</pre>
   
 
   
+
+  
 </section>
 
       </div>
@@ -550,7 +657,7 @@ onClick.dispatch(data);</pre>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/2685adb91b8344b707e2121ccdf3916f1aa84ac7/src/channel.js#L70-L75'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/1232d80675dfa004537e05795949a8e223d7c3e2/src/channel.js#L80-L85'>
       <span>src/channel.js</span>
       </a>
     
@@ -595,6 +702,8 @@ onClick.dispatch(data);</pre>
   
 
   
+
+  
 </section>
 
       </div>
@@ -614,16 +723,16 @@ onClick.dispatch(data);</pre>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/2685adb91b8344b707e2121ccdf3916f1aa84ac7/src/channel.js#L82-L84'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/1232d80675dfa004537e05795949a8e223d7c3e2/src/channel.js#L92-L94'>
       <span>src/channel.js</span>
       </a>
     
   </div>
   
 
-  <p>Add listener for event</p>
+  <p>Add listener for event.</p>
 
-    <div class='pre p1 fill-light mt0'>addListener(callback: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>, context: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</div>
+    <div class='pre p1 fill-light mt0'>addListener(callback: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a> | <a href="#channel">Channel</a>), context: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</div>
   
   
 
@@ -640,7 +749,7 @@ onClick.dispatch(data);</pre>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>callback</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</code>
+            <span class='code bold'>callback</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a> | <a href="#channel">Channel</a>))</code>
 	    
           </div>
           
@@ -655,6 +764,8 @@ onClick.dispatch(data);</pre>
         </div>
       
     </div>
+  
+
   
 
   
@@ -691,16 +802,16 @@ onClick.dispatch(data);</pre>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/2685adb91b8344b707e2121ccdf3916f1aa84ac7/src/channel.js#L91-L93'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/1232d80675dfa004537e05795949a8e223d7c3e2/src/channel.js#L101-L103'>
       <span>src/channel.js</span>
       </a>
     
   </div>
   
 
-  <p>Add once listener for event</p>
+  <p>Add once listener for event.</p>
 
-    <div class='pre p1 fill-light mt0'>addOnceListener(callback: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>, context: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</div>
+    <div class='pre p1 fill-light mt0'>addOnceListener(callback: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a> | <a href="#channel">Channel</a>), context: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</div>
   
   
 
@@ -717,7 +828,7 @@ onClick.dispatch(data);</pre>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>callback</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</code>
+            <span class='code bold'>callback</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a> | <a href="#channel">Channel</a>))</code>
 	    
           </div>
           
@@ -732,6 +843,8 @@ onClick.dispatch(data);</pre>
         </div>
       
     </div>
+  
+
   
 
   
@@ -768,16 +881,16 @@ onClick.dispatch(data);</pre>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/2685adb91b8344b707e2121ccdf3916f1aa84ac7/src/channel.js#L100-L106'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/1232d80675dfa004537e05795949a8e223d7c3e2/src/channel.js#L110-L116'>
       <span>src/channel.js</span>
       </a>
     
   </div>
   
 
-  <p>Remove listener from event</p>
+  <p>Remove listener from event.</p>
 
-    <div class='pre p1 fill-light mt0'>removeListener(callback: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>, context: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</div>
+    <div class='pre p1 fill-light mt0'>removeListener(callback: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a> | <a href="#channel">Channel</a>), context: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</div>
   
   
 
@@ -794,7 +907,7 @@ onClick.dispatch(data);</pre>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>callback</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</code>
+            <span class='code bold'>callback</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a> | <a href="#channel">Channel</a>))</code>
 	    
           </div>
           
@@ -809,6 +922,8 @@ onClick.dispatch(data);</pre>
         </div>
       
     </div>
+  
+
   
 
   
@@ -845,7 +960,7 @@ onClick.dispatch(data);</pre>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/2685adb91b8344b707e2121ccdf3916f1aa84ac7/src/channel.js#L111-L115'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/1232d80675dfa004537e05795949a8e223d7c3e2/src/channel.js#L121-L125'>
       <span>src/channel.js</span>
       </a>
     
@@ -863,6 +978,8 @@ onClick.dispatch(data);</pre>
   
   
   
+  
+
   
 
   
@@ -901,16 +1018,16 @@ onClick.dispatch(data);</pre>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/2685adb91b8344b707e2121ccdf3916f1aa84ac7/src/channel.js#L123-L126'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/1232d80675dfa004537e05795949a8e223d7c3e2/src/channel.js#L133-L136'>
       <span>src/channel.js</span>
       </a>
     
   </div>
   
 
-  <p>Is listener exist</p>
+  <p>Is listener exist.</p>
 
-    <div class='pre p1 fill-light mt0'>hasListener(callback: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>, context: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></div>
+    <div class='pre p1 fill-light mt0'>hasListener(callback: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a> | <a href="#channel">Channel</a>), context: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></div>
   
   
 
@@ -927,7 +1044,7 @@ onClick.dispatch(data);</pre>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>callback</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</code>
+            <span class='code bold'>callback</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a> | <a href="#channel">Channel</a>))</code>
 	    
           </div>
           
@@ -967,6 +1084,8 @@ onClick.dispatch(data);</pre>
   
 
   
+
+  
 </section>
 
       </div>
@@ -986,14 +1105,14 @@ onClick.dispatch(data);</pre>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/2685adb91b8344b707e2121ccdf3916f1aa84ac7/src/channel.js#L132-L134'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/1232d80675dfa004537e05795949a8e223d7c3e2/src/channel.js#L142-L144'>
       <span>src/channel.js</span>
       </a>
     
   </div>
   
 
-  <p>Are there any listeners</p>
+  <p>Are there any listeners.</p>
 
     <div class='pre p1 fill-light mt0'>hasListeners(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></div>
   
@@ -1031,6 +1150,8 @@ onClick.dispatch(data);</pre>
   
 
   
+
+  
 </section>
 
       </div>
@@ -1050,14 +1171,14 @@ onClick.dispatch(data);</pre>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/2685adb91b8344b707e2121ccdf3916f1aa84ac7/src/channel.js#L139-L141'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/1232d80675dfa004537e05795949a8e223d7c3e2/src/channel.js#L149-L151'>
       <span>src/channel.js</span>
       </a>
     
   </div>
   
 
-  <p>Call all listeners with specified params</p>
+  <p>Call all listeners with specified params.</p>
 
     <div class='pre p1 fill-light mt0'>dispatch(args: ...any)</div>
   
@@ -1100,6 +1221,8 @@ onClick.dispatch(data);</pre>
   
 
   
+
+  
 </section>
 
       </div>
@@ -1119,14 +1242,14 @@ onClick.dispatch(data);</pre>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/2685adb91b8344b707e2121ccdf3916f1aa84ac7/src/channel.js#L146-L148'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/1232d80675dfa004537e05795949a8e223d7c3e2/src/channel.js#L156-L158'>
       <span>src/channel.js</span>
       </a>
     
   </div>
   
 
-  <p>Call all listeners with specified params asynchronously</p>
+  <p>Call all listeners with specified params asynchronously.</p>
 
     <div class='pre p1 fill-light mt0'>dispatchAsync(args: ...any)</div>
   
@@ -1169,6 +1292,8 @@ onClick.dispatch(data);</pre>
   
 
   
+
+  
 </section>
 
       </div>
@@ -1188,14 +1313,14 @@ onClick.dispatch(data);</pre>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/2685adb91b8344b707e2121ccdf3916f1aa84ac7/src/channel.js#L155-L163'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/1232d80675dfa004537e05795949a8e223d7c3e2/src/channel.js#L165-L173'>
       <span>src/channel.js</span>
       </a>
     
   </div>
   
 
-  <p>Mute channel</p>
+  <p>Mute channel.</p>
 
     <div class='pre p1 fill-light mt0'>mute(options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</div>
   
@@ -1264,6 +1389,8 @@ onClick.dispatch(data);</pre>
   
 
   
+
+  
 </section>
 
       </div>
@@ -1283,14 +1410,14 @@ onClick.dispatch(data);</pre>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/2685adb91b8344b707e2121ccdf3916f1aa84ac7/src/channel.js#L168-L174'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/1232d80675dfa004537e05795949a8e223d7c3e2/src/channel.js#L178-L184'>
       <span>src/channel.js</span>
       </a>
     
   </div>
   
 
-  <p>Unmute channel</p>
+  <p>Unmute channel.</p>
 
     <div class='pre p1 fill-light mt0'>unmute()</div>
   
@@ -1301,6 +1428,8 @@ onClick.dispatch(data);</pre>
   
   
   
+  
+
   
 
   
@@ -1347,7 +1476,7 @@ onClick.dispatch(data);</pre>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/2685adb91b8344b707e2121ccdf3916f1aa84ac7/src/event-emitter.js#L17-L154'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/1232d80675dfa004537e05795949a8e223d7c3e2/src/event-emitter.js#L17-L154'>
       <span>src/event-emitter.js</span>
       </a>
     
@@ -1366,6 +1495,8 @@ The main difference from single channel is that each method takes additional <co
   
   
   
+  
+
   
 
   
@@ -1411,7 +1542,7 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/2685adb91b8344b707e2121ccdf3916f1aa84ac7/src/event-emitter.js#L29-L31'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/1232d80675dfa004537e05795949a8e223d7c3e2/src/event-emitter.js#L29-L31'>
       <span>src/event-emitter.js</span>
       </a>
     
@@ -1420,7 +1551,7 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
 
   <p>Adds listener to specific event</p>
 
-    <div class='pre p1 fill-light mt0'>addListener(event: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, callback: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>, context: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</div>
+    <div class='pre p1 fill-light mt0'>addListener(event: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, callback: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a> | <a href="#channel">Channel</a>), context: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</div>
   
   
 
@@ -1445,7 +1576,7 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>callback</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</code>
+            <span class='code bold'>callback</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a> | <a href="#channel">Channel</a>))</code>
 	    
           </div>
           
@@ -1460,6 +1591,8 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
         </div>
       
     </div>
+  
+
   
 
   
@@ -1496,7 +1629,7 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/2685adb91b8344b707e2121ccdf3916f1aa84ac7/src/event-emitter.js#L40-L42'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/1232d80675dfa004537e05795949a8e223d7c3e2/src/event-emitter.js#L40-L42'>
       <span>src/event-emitter.js</span>
       </a>
     
@@ -1505,7 +1638,7 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
 
   <p>Adds listener to specific event (alias to addListener)</p>
 
-    <div class='pre p1 fill-light mt0'>on(event: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, callback: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>, context: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</div>
+    <div class='pre p1 fill-light mt0'>on(event: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, callback: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a> | <a href="#channel">Channel</a>), context: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</div>
   
   
 
@@ -1530,7 +1663,7 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>callback</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</code>
+            <span class='code bold'>callback</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a> | <a href="#channel">Channel</a>))</code>
 	    
           </div>
           
@@ -1545,6 +1678,8 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
         </div>
       
     </div>
+  
+
   
 
   
@@ -1581,7 +1716,7 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/2685adb91b8344b707e2121ccdf3916f1aa84ac7/src/event-emitter.js#L51-L53'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/1232d80675dfa004537e05795949a8e223d7c3e2/src/event-emitter.js#L51-L53'>
       <span>src/event-emitter.js</span>
       </a>
     
@@ -1590,7 +1725,7 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
 
   <p>Adds once listener to specific event</p>
 
-    <div class='pre p1 fill-light mt0'>addOnceListener(event: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, callback: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>, context: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</div>
+    <div class='pre p1 fill-light mt0'>addOnceListener(event: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, callback: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a> | <a href="#channel">Channel</a>), context: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</div>
   
   
 
@@ -1615,7 +1750,7 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>callback</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</code>
+            <span class='code bold'>callback</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a> | <a href="#channel">Channel</a>))</code>
 	    
           </div>
           
@@ -1630,6 +1765,8 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
         </div>
       
     </div>
+  
+
   
 
   
@@ -1666,7 +1803,7 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/2685adb91b8344b707e2121ccdf3916f1aa84ac7/src/event-emitter.js#L62-L64'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/1232d80675dfa004537e05795949a8e223d7c3e2/src/event-emitter.js#L62-L64'>
       <span>src/event-emitter.js</span>
       </a>
     
@@ -1675,7 +1812,7 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
 
   <p>Adds once listener to specific event (alias to addOnceListener)</p>
 
-    <div class='pre p1 fill-light mt0'>once(event: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, callback: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>, context: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</div>
+    <div class='pre p1 fill-light mt0'>once(event: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, callback: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a> | <a href="#channel">Channel</a>), context: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</div>
   
   
 
@@ -1700,7 +1837,7 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>callback</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</code>
+            <span class='code bold'>callback</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a> | <a href="#channel">Channel</a>))</code>
 	    
           </div>
           
@@ -1715,6 +1852,8 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
         </div>
       
     </div>
+  
+
   
 
   
@@ -1751,7 +1890,7 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/2685adb91b8344b707e2121ccdf3916f1aa84ac7/src/event-emitter.js#L73-L75'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/1232d80675dfa004537e05795949a8e223d7c3e2/src/event-emitter.js#L73-L75'>
       <span>src/event-emitter.js</span>
       </a>
     
@@ -1760,7 +1899,7 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
 
   <p>Removes listener from specific event</p>
 
-    <div class='pre p1 fill-light mt0'>removeListener(event: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, callback: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>, context: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</div>
+    <div class='pre p1 fill-light mt0'>removeListener(event: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, callback: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a> | <a href="#channel">Channel</a>), context: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</div>
   
   
 
@@ -1785,7 +1924,7 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>callback</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</code>
+            <span class='code bold'>callback</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a> | <a href="#channel">Channel</a>))</code>
 	    
           </div>
           
@@ -1800,6 +1939,8 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
         </div>
       
     </div>
+  
+
   
 
   
@@ -1836,7 +1977,7 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/2685adb91b8344b707e2121ccdf3916f1aa84ac7/src/event-emitter.js#L84-L86'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/1232d80675dfa004537e05795949a8e223d7c3e2/src/event-emitter.js#L84-L86'>
       <span>src/event-emitter.js</span>
       </a>
     
@@ -1845,7 +1986,7 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
 
   <p>Removes listener from specific event (alias to removeListener)</p>
 
-    <div class='pre p1 fill-light mt0'>off(event: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, callback: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>, context: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</div>
+    <div class='pre p1 fill-light mt0'>off(event: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, callback: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a> | <a href="#channel">Channel</a>), context: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?)</div>
   
   
 
@@ -1870,7 +2011,7 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>callback</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</code>
+            <span class='code bold'>callback</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a> | <a href="#channel">Channel</a>))</code>
 	    
           </div>
           
@@ -1885,6 +2026,8 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
         </div>
       
     </div>
+  
+
   
 
   
@@ -1921,7 +2064,7 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/2685adb91b8344b707e2121ccdf3916f1aa84ac7/src/event-emitter.js#L96-L98'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/1232d80675dfa004537e05795949a8e223d7c3e2/src/event-emitter.js#L96-L98'>
       <span>src/event-emitter.js</span>
       </a>
     
@@ -1930,7 +2073,7 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
 
   <p>Is listener exist for specific event</p>
 
-    <div class='pre p1 fill-light mt0'>hasListener(event: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, callback: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>, context: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></div>
+    <div class='pre p1 fill-light mt0'>hasListener(event: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, callback: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a> | <a href="#channel">Channel</a>), context: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></div>
   
   
 
@@ -1955,7 +2098,7 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>callback</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</code>
+            <span class='code bold'>callback</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a> | <a href="#channel">Channel</a>))</code>
 	    
           </div>
           
@@ -1982,6 +2125,8 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
 
       
     
+  
+
   
 
   
@@ -2014,7 +2159,7 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/2685adb91b8344b707e2121ccdf3916f1aa84ac7/src/event-emitter.js#L108-L110'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/1232d80675dfa004537e05795949a8e223d7c3e2/src/event-emitter.js#L108-L110'>
       <span>src/event-emitter.js</span>
       </a>
     
@@ -2023,7 +2168,7 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
 
   <p>Is listener exist for specific event (alias to hasListener)</p>
 
-    <div class='pre p1 fill-light mt0'>has(event: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, callback: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>, context: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></div>
+    <div class='pre p1 fill-light mt0'>has(event: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, callback: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a> | <a href="#channel">Channel</a>), context: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>?): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></div>
   
   
 
@@ -2048,7 +2193,7 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>callback</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</code>
+            <span class='code bold'>callback</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a> | <a href="#channel">Channel</a>))</code>
 	    
           </div>
           
@@ -2088,6 +2233,8 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
   
 
   
+
+  
 </section>
 
       </div>
@@ -2107,7 +2254,7 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/2685adb91b8344b707e2121ccdf3916f1aa84ac7/src/event-emitter.js#L117-L119'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/1232d80675dfa004537e05795949a8e223d7c3e2/src/event-emitter.js#L117-L119'>
       <span>src/event-emitter.js</span>
       </a>
     
@@ -2165,6 +2312,8 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
   
 
   
+
+  
 </section>
 
       </div>
@@ -2184,7 +2333,7 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/2685adb91b8344b707e2121ccdf3916f1aa84ac7/src/event-emitter.js#L127-L129'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/1232d80675dfa004537e05795949a8e223d7c3e2/src/event-emitter.js#L127-L129'>
       <span>src/event-emitter.js</span>
       </a>
     
@@ -2242,6 +2391,8 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
   
 
   
+
+  
 </section>
 
       </div>
@@ -2261,7 +2412,7 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/2685adb91b8344b707e2121ccdf3916f1aa84ac7/src/event-emitter.js#L137-L139'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/1232d80675dfa004537e05795949a8e223d7c3e2/src/event-emitter.js#L137-L139'>
       <span>src/event-emitter.js</span>
       </a>
     
@@ -2319,6 +2470,8 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
   
 
   
+
+  
 </section>
 
       </div>
@@ -2346,7 +2499,7 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/2685adb91b8344b707e2121ccdf3916f1aa84ac7/src/subscription.js#L22-L46'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/1232d80675dfa004537e05795949a8e223d7c3e2/src/subscription.js#L22-L46'>
       <span>src/subscription.js</span>
       </a>
     
@@ -2379,6 +2532,8 @@ emitter.emit(<span class="hljs-string">'myEvent'</span>, <span class="hljs-strin
         </div>
       
     </div>
+  
+
   
 
   
@@ -2426,7 +2581,7 @@ subscription.off();</pre>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/2685adb91b8344b707e2121ccdf3916f1aa84ac7/src/subscription.js#L32-L35'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/1232d80675dfa004537e05795949a8e223d7c3e2/src/subscription.js#L32-L35'>
       <span>src/subscription.js</span>
       </a>
     
@@ -2435,7 +2590,7 @@ subscription.off();</pre>
 
   <p>Turn on all listeners</p>
 
-    <div class='pre p1 fill-light mt0'>on(): <a href="#subscription">Subscription</a></div>
+    <div class='pre p1 fill-light mt0'>on(): this</div>
   
   
 
@@ -2453,11 +2608,13 @@ subscription.off();</pre>
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="#subscription">Subscription</a></code>:
+      <code>this</code>:
         
 
       
     
+  
+
   
 
   
@@ -2490,7 +2647,7 @@ subscription.off();</pre>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/2685adb91b8344b707e2121ccdf3916f1aa84ac7/src/subscription.js#L42-L45'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/1232d80675dfa004537e05795949a8e223d7c3e2/src/subscription.js#L42-L45'>
       <span>src/subscription.js</span>
       </a>
     
@@ -2499,7 +2656,7 @@ subscription.off();</pre>
 
   <p>Turn off all listeners</p>
 
-    <div class='pre p1 fill-light mt0'>off(): <a href="#subscription">Subscription</a></div>
+    <div class='pre p1 fill-light mt0'>off(): this</div>
   
   
 
@@ -2517,11 +2674,13 @@ subscription.off();</pre>
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="#subscription">Subscription</a></code>:
+      <code>this</code>:
         
 
       
     
+  
+
   
 
   
@@ -2562,7 +2721,7 @@ subscription.off();</pre>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/2685adb91b8344b707e2121ccdf3916f1aa84ac7/src/react-subscription.js#L36-L58'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/vitalets/chnl/blob/1232d80675dfa004537e05795949a8e223d7c3e2/src/react-subscription.js#L36-L58'>
       <span>src/react-subscription.js</span>
       </a>
     
@@ -2611,6 +2770,8 @@ in <code>componentDidMount</code> / <code>componentWillUnmount</code>.</p>
         </div>
       
     </div>
+  
+
   
 
   
