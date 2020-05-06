@@ -167,6 +167,25 @@ test('should correctly add and remove listeners in dispatching loop', t => {
   t.truthy(channel.hasListener(spy4));
 });
 
+test('should add channel as listener', t => {
+  const clock = sinon.useFakeTimers();
+  const channel = new Channel();
+  const proxyChannel = new Channel();
+  const spy = sinon.spy();
+  proxyChannel.addListener(spy);
+  channel.addListener(proxyChannel);
+  t.is(spy.callCount, 0);
+  channel.dispatch('foo');
+  t.is(spy.callCount, 1);
+  t.deepEqual(spy.getCall(0).args, ['foo']);
+  channel.dispatchAsync('bar');
+  t.is(spy.callCount, 1);
+  clock.tick(0);
+  t.is(spy.callCount, 2);
+  t.deepEqual(spy.getCall(1).args, ['bar']);
+  clock.restore();
+});
+
 test('should throw when duplicating channel listeners', t => {
   const channel = new Channel('channel');
   const listener = () => {};

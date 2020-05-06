@@ -27,6 +27,16 @@ export default class Channel {
   }
 
   /**
+   * Check for the passed listener is valid.
+   *
+   * @param {*} listener
+   * @returns {Boolean}
+   */
+  static isValidListener(listener) {
+    return typeof listener === 'function' || listener instanceof Channel;
+  }
+
+  /**
    * Triggers when listener is added to channel.
    *
    * @returns {Channel}
@@ -75,8 +85,8 @@ export default class Channel {
   }
 
   /**
-   * Add listener for event
-   * @param {Function} callback
+   * Add listener for event.
+   * @param {Function|Channel} callback
    * @param {Object} [context]
    */
   addListener(callback, context) {
@@ -84,8 +94,8 @@ export default class Channel {
   }
 
   /**
-   * Add once listener for event
-   * @param {Function} callback
+   * Add once listener for event.
+   * @param {Function|Channel} callback
    * @param {Object} [context]
    */
   addOnceListener(callback, context) {
@@ -93,12 +103,12 @@ export default class Channel {
   }
 
   /**
-   * Remove listener from event
-   * @param {Function} callback
+   * Remove listener from event.
+   * @param {Function|Channel} callback
    * @param {Object} [context]
    */
   removeListener(callback, context) {
-    this._ensureFunction(callback);
+    this._ensureListener(callback);
     const index = this._indexOfListener(callback, context);
     if (index >= 0) {
       this._spliceListener(index);
@@ -115,18 +125,18 @@ export default class Channel {
   }
 
   /**
-   * Is listener exist
-   * @param {Function} callback
+   * Is listener exist.
+   * @param {Function|Channel} callback
    * @param {Object} [context]
    * @returns {Boolean}
    */
   hasListener(callback, context) {
-    this._ensureFunction(callback);
+    this._ensureListener(callback);
     return this._indexOfListener(callback, context) >= 0;
   }
 
   /**
-   * Are there any listeners
+   * Are there any listeners.
    * @returns {Boolean}
    */
   hasListeners() {
@@ -134,21 +144,21 @@ export default class Channel {
   }
 
   /**
-   * Call all listeners with specified params
+   * Call all listeners with specified params.
    */
   dispatch(...args) {
     this._invokeListeners({args, async: false});
   }
 
   /**
-   * Call all listeners with specified params asynchronously
+   * Call all listeners with specified params asynchronously.
    */
   dispatchAsync(...args) {
     this._invokeListeners({args, async: true});
   }
 
   /**
-   * Mute channel
+   * Mute channel.
    * @param {Object} [options]
    * @param {Boolean} [options.accumulate] accumulate events and call listeners after .unmute()
    */
@@ -163,7 +173,7 @@ export default class Channel {
   }
 
   /**
-   * Unmute channel
+   * Unmute channel.
    */
   unmute() {
     this._mute = false;
@@ -201,25 +211,35 @@ export default class Channel {
    * @private
    */
   _invokeListener(listener, options) {
+    const isListenerChannel = listener.callback instanceof Channel;
     if (options.async) {
-      setTimeout(() => listener.callback.apply(listener.context, options.args), 0);
+      if (isListenerChannel) {
+        listener.callback.dispatchAsync(...options.args);
+      } else {
+        setTimeout(() => listener.callback.apply(listener.context, options.args), 0);
+      }
     } else {
-      listener.callback.apply(listener.context, options.args);
+      if (isListenerChannel) {
+        listener.callback.dispatch(...options.args);
+      } else {
+        listener.callback.apply(listener.context, options.args);
+      }
     }
   }
 
   /**
-   * Ensure function
-   * @param {Function} callback
+   * Ensure listener.
+   * @param {Function|Channel} listener
+   * @private
    */
-  _ensureFunction(callback) {
-    if (typeof callback !== 'function') {
-      throw new Error('Channel ' + this._name + ': listener is not a function');
+  _ensureListener(listener) {
+    if (!Channel.isValidListener(listener)) {
+      throw new Error('Channel ' + this._name + ': listener is not a function and not a Channel');
     }
   }
 
   /**
-   * Dispatch inner events when listener is added
+   * Dispatch inner events when listener is added.
    * @private
    */
   _dispatchInnerAddEvents(...args) {
@@ -232,7 +252,7 @@ export default class Channel {
   }
 
   /**
-   * Dispatch inner events when listener is removed
+   * Dispatch inner events when listener is removed.
    * @private
    */
   _dispatchInnerRemoveEvents(...args) {
@@ -245,8 +265,8 @@ export default class Channel {
   }
 
   /**
-   * Find listener index
-   * @param {Function} callback
+   * Find listener index.
+   * @param {Function|Channel} callback
    * @param {Object} [context]
    * @private
    */
@@ -254,16 +274,17 @@ export default class Channel {
     for (let i = 0; i < this._listeners.length; i++) {
       const listener = this._listeners[i];
       const equalCallbacks = listener.callback === callback;
+      const isListenerChannel = callback instanceof Channel;
       const emptyContexts = context === undefined && listener.context === undefined;
       const equalContexts = context === listener.context;
-      if (equalCallbacks && (emptyContexts || equalContexts)) {
+      if (equalCallbacks && (isListenerChannel || emptyContexts || equalContexts)) {
         return i;
       }
     }
   }
 
   /**
-   * Dispatch accumulated events
+   * Dispatch accumulated events.
    * @private
    */
   _dispatchAccumulated() {
@@ -272,32 +293,34 @@ export default class Channel {
   }
 
   /**
-   * Pushes listener
-   * @param {Function} callback
+   * Pushes listener.
+   * @param {Function|Channel} listener
    * @param {Object} context
    * @param {Boolean} once
+   * @private
    */
-  _pushListener(callback, context, once) {
-    this._ensureFunction(callback);
-    this._checkForDuplicates(callback, context);
-    this._listeners.push({callback, context, once});
-    this._dispatchInnerAddEvents(callback, context, once);
+  _pushListener(listener, context, once) {
+    this._ensureListener(listener);
+    this._checkForDuplicates(listener, context);
+    this._listeners.push({callback: listener, context, once});
+    this._dispatchInnerAddEvents(listener, context, once);
   }
 
   /**
    * Check for listeners duplicates
-   * @param {Function} callback
+   * @param {Function|Channel} listener
    * @param {Object} context
    */
-  _checkForDuplicates(callback, context) {
-    if (this.hasListener(callback, context)) {
+  _checkForDuplicates(listener, context) {
+    if (this.hasListener(listener, context)) {
       throw new Error('Channel ' + this._name + ': duplicating listeners');
     }
   }
 
   /**
-   * Splice listener under index
+   * Splice listener under index.
    * @param {Number} index
+   * @private
    */
   _spliceListener(index) {
     const {callback, context, once} = this._listeners[index];

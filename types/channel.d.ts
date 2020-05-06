@@ -1,6 +1,7 @@
+import {Listener} from "./general";
 
-type ChannelMethod = (callback: (...args: any[]) => any, context?: any) => void;
-type ChannelBooleanMethod = (callback: (...args: any[]) => any, context?: any) => boolean;
+type ChannelMethod = (callback: Listener, context?: any) => void;
+type ChannelBooleanMethod = (callback: Listener, context?: any) => boolean;
 
 export = Channel;
 

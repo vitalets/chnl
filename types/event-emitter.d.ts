@@ -1,6 +1,8 @@
+import Channel from './channel';
+import {Listener} from './general';
 
-type EventEmitterMethod = (event: string, callback: (...args: any[]) => any, context?: any) => void;
-type EventEmitterBooleanMethod = (event: string, callback: (...args: any[]) => any, context?: any) => boolean;
+type EventEmitterMethod = (event: string, callback: Listener, context?: any) => void;
+type EventEmitterBooleanMethod = (event: string, callback: Listener, context?: any) => boolean;
 
 export = EventEmitter;
 
