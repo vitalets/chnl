@@ -1,10 +1,9 @@
-
-import SubscriptionItem = require('./subscription-item');
+import {SubscriptionItemParams} from './subscription-item';
 
 export = Subscription;
 
 declare class Subscription {
-    constructor(items: SubscriptionItem[]);
-    on(): void;
-    off(): void;
+    constructor(items: SubscriptionItemParams[]);
+    on(): this;
+    off(): this;
 }

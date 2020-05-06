@@ -27,7 +27,7 @@ export default class Subscription {
   /**
    * Turn on all listeners
    *
-   * @returns {Subscription}
+   * @returns {this}
    */
   on() {
     this._items.forEach(item => item.on());
@@ -37,7 +37,7 @@ export default class Subscription {
   /**
    * Turn off all listeners
    *
-   * @returns {Subscription}
+   * @returns {this}
    */
   off() {
     this._items.forEach(item => item.off());

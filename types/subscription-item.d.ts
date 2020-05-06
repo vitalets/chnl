@@ -1,15 +1,13 @@
 
 import Channel = require('./channel');
 
-export = SubscriptionItem;
-
-interface SubscriptionItemParams {
+export interface SubscriptionItemParams {
     channel: Channel;
     listener: (...args: any[]) => any;
     event?: string;
 }
 
-declare class SubscriptionItem {
+export class SubscriptionItem {
     constructor(params: SubscriptionItemParams);
     on(): void;
     off(): void;
